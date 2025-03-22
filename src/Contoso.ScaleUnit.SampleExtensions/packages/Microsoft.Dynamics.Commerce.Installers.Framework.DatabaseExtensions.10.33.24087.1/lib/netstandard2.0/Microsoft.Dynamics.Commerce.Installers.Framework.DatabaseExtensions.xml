@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Dynamics.Commerce.Installers.Framework.DatabaseExtensions</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.DatabaseExtensions.InstallDbExtensionsStep">
+            <summary>
+            Installer step that applies customer extensions to channel database.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.DatabaseExtensions.InstallDbExtensionsStep.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.DatabaseExtensions.InstallDbExtensionsStep.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.DatabaseExtensions.InstallDbExtensionsStep"/> class.
+            </summary>
+            <param name="connectionStringKey">The configuration key name to retrieve the database connection string.</param>
+            <param name="extensionScriptsRelativePath">The path to the database extension scripts relative to the extension root directory.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.DatabaseExtensions.InstallDbExtensionsStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Runs the installer step.
+            </summary>
+            <param name="context">The installer step context.</param>
+            <returns>The task resulting from the step execution.</returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,10 @@
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Target Name="CopyFilesFromTools" BeforeTargets="BeforeResolveReferences">
+    <ItemGroup>
+      <FilesToCopy Include="$(MSBuildThisFileDirectory)..\tools\*.dll" />
+    </ItemGroup>
+    <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(OutDir)" />
+  </Target>
+  
+</Project>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Dynamics.Commerce.Sdk.Installers.StoreCommerce</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Dynamics.Commerce.Sdk.Installers.StoreCommerce.InstallOfflineDatabaseExtensionsStep">
+            <summary>
+            Installer step that wraps the InstallDbExtensionsStep to skip it when necessary.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Sdk.Installers.StoreCommerce.InstallOfflineDatabaseExtensionsStep.OfflineConnectionStringKey">
+            <summary>
+            The app offline connection string key name.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Sdk.Installers.StoreCommerce.InstallOfflineDatabaseExtensionsStep.OfflineInstallationStatusKey">
+            <summary>
+            The name of the configuration key that holds the offline installation status.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Sdk.Installers.StoreCommerce.InstallOfflineDatabaseExtensionsStep.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Sdk.Installers.StoreCommerce.InstallOfflineDatabaseExtensionsStep"/> class.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Sdk.Installers.StoreCommerce.InstallOfflineDatabaseExtensionsStep.Events">
+            <summary>
+            Initialize enums for new diagnostics telemetry.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Sdk.Installers.StoreCommerce.InstallOfflineDatabaseExtensionsStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Runs the installer step.
+            </summary>
+            <param name="context">The installer step context.</param>
+            <returns>The task resulting from the step execution.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Sdk.Installers.StoreCommerce.InstallOfflineDatabaseExtensionsStep.ToString">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

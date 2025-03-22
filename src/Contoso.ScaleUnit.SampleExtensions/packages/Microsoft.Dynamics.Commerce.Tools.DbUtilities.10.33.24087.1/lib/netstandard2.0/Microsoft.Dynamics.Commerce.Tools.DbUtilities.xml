@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Dynamics.Commerce.Tools.DbUtilities</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseDemoData">
+            <summary>
+            The class works with Retail Channel Database demo data.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseDemoData.PopulateRetailChannelDatabase(System.String,System.String,System.IO.Abstractions.IFileSystem,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Populates Retail Channel Database with demo data.
+            </summary>
+            <param name="connectionString">A connection string to Retail Channel Database.</param>
+            <param name="demoDataPath">A path to a folder with demo data.</param>
+            <param name="fileSystem">An interface to a file system.</param>
+            <param name="logger">An interface to a logger.</param>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptException">
+            <summary>
+            The exception is thrown when database script execution failed.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes new instance of <see cref="T:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptException"/>.
+            </summary>
+            <param name="message">Message.</param>
+            <param name="innerException">Inner exception.</param>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner">
+            <summary>
+            Represents an instance of a database.
+            The database is NOT dropped when disposing the instance of this class.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner.GoRegex">
+            <summary>
+            The regular expression capable of splitting GO SMO statements.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner.connection">
+            <summary>
+            The SqlConnection instance used when accessing the database. 
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner.connectionString">
+            <summary>
+            The connection string used when accessing the database. 
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner.logger">
+            <summary>
+            The logger instance used.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner.#ctor(System.String,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner"/> class.
+            </summary>
+            <param name="connectionString">The database connection string.</param>
+            <param name="logger">The logger for the database connection.</param>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner.ConnectionString">
+            <summary>
+            Gets the connection string.
+            </summary>
+            <value>
+            The connection string.
+            </value>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner.Timeout">
+            <summary>
+            Gets or sets the timeout in seconds.
+            </summary>
+            <value>
+            The timeout in seconds.
+            </value>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner.Execute(System.String[])">
+            <summary>
+            Executes the command against the database.
+            </summary>
+            <param name="sqlCommands">The commands to be executed.</param>        
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner.Execute(System.Collections.IDictionary,System.String[])">
+            <summary>
+            Executes the command against the database.
+            </summary>
+            <param name="parameters">Query parameters.</param>
+            <param name="sqlCommands">The commands to be executed.</param>        
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner.ExecuteSqlText(System.String)">
+            <summary>
+            Executes the command against the database.
+            </summary>
+            <param name="sqlText">The sql text to be executed.</param>
+            <remarks>A SQL text is a collection of SQL Statements separated either by a semi-collon or a 'GO' keyword by itself on a new line.</remarks>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner.ExecuteScalarCollection(System.String)">
+            <summary>
+            Executes the command against the database.
+            </summary>
+            <param name="sqlQuery">The command to be executed.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner.ExecuteScalarCollectionWithParameters(System.Collections.IDictionary,System.String)">
+            <summary>
+            Executes the command against the database.
+            </summary>
+            <param name="parameters">Query parameters.</param>
+            <param name="sqlQuery">The command to be executed.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner.ExecuteQuery``1(System.String,System.Func{Microsoft.Data.SqlClient.SqlDataReader,``0})">
+            <summary>
+            Executes the query against the database.
+            </summary>
+            <param name="sqlQuery">The command to be executed.</param>
+            <param name="selector">The selector delegate to apply to each reader row.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner.ExecuteScalar(System.String)">
+            <summary>
+            Executes the command against the database.
+            </summary>
+            <param name="sqlQuery">The command to be executed.</param>
+            <returns>The first column of the first row.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner.CleanupText(System.String)">
+            <summary>
+            Replace all occurrences of Unicode invalid character replacement characters with spaces.
+            </summary>
+            <param name="sqlText">The SQL text to clean.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner.CheckSchema(System.String)">
+            <summary>
+            Check that current database schema matches the specified name.
+            </summary>
+            <param name="schemaName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner.CreateSchemaRestrictedScriptsRunner(System.String,System.String,System.String)">
+            <summary>
+            Creates the database scripts runner restricted to access only the specified schema.
+            </summary>
+            <param name="userName">The user name to create.</param>
+            <param name="schemaName">The database schema name.</param>
+            <param name="roleName">The database role name.</param>
+            <returns>The instance created.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner.GetFileContentFromResource(System.Reflection.Assembly,System.String)">
+            <summary>
+            Reads the script from resources.
+            </summary>
+            <param name="assembly">The assembly to read from.</param>
+            <param name="resourceName">The resource name to use.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner.DropRestrictedUser(System.String)">
+            <summary>
+            Drops the restricted user from the database. Login with the same name is dropped as well.
+            Any exceptions will be hidden.
+            </summary>
+            <param name="userName">The user name to drop.</param>
+            <returns><code>true</code>if the operation completed successfully.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner.EnsureReady(Microsoft.Data.SqlClient.SqlInfoMessageEventHandler)">
+            <summary>
+            Creates all necessary classes to work with the database.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner.RemoveInfoMessageEventHandler(Microsoft.Data.SqlClient.SqlInfoMessageEventHandler)">
+            <summary>
+            Removes the previously attached event handler.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner.ConnectionInfoMessageEventHandler(System.Object,Microsoft.Data.SqlClient.SqlInfoMessageEventArgs)">
+            <summary>
+            Event handler that logs the received database connection events.
+            </summary>
+            <param name="sender">The sender of the message.</param>
+            <param name="e">The arguments of the event.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DatabaseScriptsRunner.Dispose">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DemoDataException">
+            <summary>
+            The exception is thrown when database population with demo data fails.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DemoDataException.#ctor(System.String)">
+            <summary>
+            Initializes new instance of <see cref="T:Microsoft.Dynamics.Commerce.Tools.DbUtilities.DemoDataException"/>.
+            </summary>
+            <param name="message">Message.</param>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Tools.DbUtilities.BcpFormat">
+            <summary>
+            Initializes new instance of <see cref="T:Microsoft.Dynamics.Commerce.Tools.DbUtilities.BcpFormat"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Tools.DbUtilities.BcpFormat.Version">
+            <summary>
+            Gets or sets a format version.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Tools.DbUtilities.BcpFormat.Columns">
+            <summary>
+            Gets or sets a column collection.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Tools.DbUtilities.BcpFormatHelper">
+            <summary>
+            Helper class to read and write to BCP file format:
+            https://docs.microsoft.com/en-us/sql/relational-databases/import-export/non-xml-format-files-sql-server?view=sql-server-ver15
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Tools.DbUtilities.BcpFormatHelper.Deserialize(System.IO.Abstractions.IFileSystem,System.String)">
+            <summary>
+            Read the BCP format from a file.
+            </summary>
+            <param name="fileSystem">The file system abstraction to use.</param>
+            <param name="fileName">The file to read from.</param>
+            <returns>The BCP format.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Tools.DbUtilities.BcpFormatHelper.UpdateColumns(Microsoft.Dynamics.Commerce.Tools.DbUtilities.BcpFormat,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Apply different column order to the columns of existing BCP format.
+            </summary>
+            <param name="format">The existing format to change.</param>
+            <param name="columns">The column order to apply.</param>
+            <returns>The changed BCP format.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Tools.DbUtilities.BcpFormatHelper.Serialize(Microsoft.Dynamics.Commerce.Tools.DbUtilities.BcpFormat)">
+            <summary>
+            Render the BCP format to a string.
+            </summary>
+            <param name="format">The format to render.</param>
+            <returns>The string representation of the format passed.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Tools.DbUtilities.Column">
+            <summary>
+            Initializes new instance of <see cref="T:Microsoft.Dynamics.Commerce.Tools.DbUtilities.Column"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Tools.DbUtilities.Column.Order">
+            <summary>
+            Gets or sets order.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Tools.DbUtilities.Column.Type">
+            <summary>
+            Gets or sets type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Tools.DbUtilities.Column.PrefixLength">
+            <summary>
+            Gets or sets prefix length.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Tools.DbUtilities.Column.DataLength">
+            <summary>
+            Gets or sets data length.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Tools.DbUtilities.Column.Terminator">
+            <summary>
+            Gets or sets terminator.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Tools.DbUtilities.Column.ColumnOrder">
+            <summary>
+            Gets or sets column order.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Tools.DbUtilities.Column.ColumnName">
+            <summary>
+            Gets or sets column name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Tools.DbUtilities.Column.Collation">
+            <summary>
+            Gets or sets collation.
+            </summary>
+        </member>
+    </members>
+</doc>

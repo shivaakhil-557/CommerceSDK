@@ -1,0 +1,75 @@
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <Prefer32Bit>false</Prefer32Bit>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <!-- Suppress SA0001XmlCommentAnalysisDisabled since GenerateDocumentationFile=false. -->
+    <NoWarn>$(NoWarn);SA0001</NoWarn>
+    <ApplicationManifest>$(MSBuildThisFileDirectory)..\contentFiles\app.manifest</ApplicationManifest>
+    <ApplicationIcon>$(MSBuildThisFileDirectory)..\contentFiles\app.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="$(ApplicationIcon)">
+      <Link>Assets/app.ico</Link>
+    </Content>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <SetupZipName>$(BaseIntermediateOutputPath)Setup.zip</SetupZipName>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <RetailInstallerFrameworkEmbedResourceDependsOn></RetailInstallerFrameworkEmbedResourceDependsOn>
+  </PropertyGroup>
+
+  <Target Name="RetailInstallerFrameworkCopyFilesToIntermediateOutputPath" Inputs="" Outputs="$(IntermediateOutputPath)Setup.zip" DependsOnTargets="RunResolvePackageDependencies" BeforeTargets="RetailInstallerFrameworkEmbedResources">
+    <Copy Condition="'$(ZipFilesIntoFlatFolderStrucutre)' == 'true'" SourceFiles="@(ZipFiles)" DestinationFolder="$(IntermediateOutputPath)ZipFiles" SkipUnchangedFiles="true" />
+    <Copy Condition="'$(ZipFilesIntoFlatFolderStrucutre)' == 'true'" SourceFiles="@(ConfigurationFiles)" DestinationFolder="$(IntermediateOutputPath)ConfigurationFiles" SkipUnchangedFiles="true" />
+
+    <Copy Condition="'$(ZipFilesIntoFlatFolderStrucutre)' != 'true' And '%(ZipFiles.Link)' == ''" SourceFiles="@(ZipFiles)" DestinationFiles="@(ZipFiles->'$(IntermediateOutputPath)ZipFiles\%(Identity)')" SkipUnchangedFiles="true" />
+    <Copy Condition="'$(ZipFilesIntoFlatFolderStrucutre)' != 'true' And '%(ZipFiles.Link)' != ''" SourceFiles="@(ZipFiles)" DestinationFiles="@(ZipFiles->'$(IntermediateOutputPath)ZipFiles\%(Link)')" SkipUnchangedFiles="true" />
+    <Copy Condition="'$(ZipFilesIntoFlatFolderStrucutre)' != 'true' And '%(ConfigurationFiles.Link)' == ''" SourceFiles="@(ConfigurationFiles)" DestinationFiles="@(ConfigurationFiles->'$(IntermediateOutputPath)ConfigurationFiles\%(Identity)')" SkipUnchangedFiles="true" />
+    <Copy Condition="'$(ZipFilesIntoFlatFolderStrucutre)' != 'true' And '%(ConfigurationFiles.Link)' != ''" SourceFiles="@(ConfigurationFiles)" DestinationFiles="@(ConfigurationFiles->'$(IntermediateOutputPath)ConfigurationFiles\%(Link)')" SkipUnchangedFiles="true" />
+
+    <PropertyGroup>
+      <SetupIncludeInZipFilePath>$(IntermediateOutputPath)\ZipFiles</SetupIncludeInZipFilePath>
+      <ConfigurationFilePath>$(IntermediateOutputPath)\ConfigurationFiles</ConfigurationFilePath>
+    </PropertyGroup>
+    <ItemGroup>
+      <SetupFilesIncludedInZip Include="$(SetupIncludeInZipFilePath)\**\*" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="RetailInstallerFrameworkEmbedResources" Outputs="$(SetupZipName)" Inputs="@(SetupFilesIncludedInZip)" DependsOnTargets="$(RetailInstallerFrameworkEmbedResourceDependsOn)" BeforeTargets="BeforeBuild">
+    <ZipDirectory SourceDirectory="$(SetupIncludeInZipFilePath)" DestinationFile="$(SetupZipName)" Overwrite="true"/>
+  </Target>
+  
+  <Target Name="RetailInstallerFrameworkEmbedDlls" DependsOnTargets="RetailInstallerFrameworkEmbedResources;$(PostBuildEventDependsOn)" BeforeTargets="CreateManifestResourceNames">
+    <CallTarget Targets="_CopyFilesMarkedCopyLocal" />
+    <ItemGroup>
+      <PackageFiles Include="$(TargetDir)\**\*.dll;"/>
+    </ItemGroup>
+    <CreateItem Include="$(TargetDir)\**\*.dll">
+      <Output TaskParameter="Include" ItemName="OutputFiles" />
+    </CreateItem>
+    <ItemGroup>
+      <EmbeddedResource Include="$(ConfigurationFilePath)\*.*">
+        <WithCulture>false</WithCulture>
+        <Type>Non-Resx</Type>
+      </EmbeddedResource>
+      <EmbeddedResource Include="@(OutputFiles)">
+        <WithCulture>false</WithCulture>
+        <Type>Non-Resx</Type>
+        <LogicalName>%(OutputFiles.RecursiveDir)%(OutputFiles.Filename)%(OutputFiles.Extension)</LogicalName>
+      </EmbeddedResource>
+      <EmbeddedResource Include="$(SetupZipName)" Condition="Exists('$(SetupZipName)') == 'true'">
+        <WithCulture>false</WithCulture>
+        <Type>Non-Resx</Type>
+        <LogicalName>$(RootNamespace).content.zip</LogicalName>
+      </EmbeddedResource>
+    </ItemGroup>
+  </Target>
+
+</Project>

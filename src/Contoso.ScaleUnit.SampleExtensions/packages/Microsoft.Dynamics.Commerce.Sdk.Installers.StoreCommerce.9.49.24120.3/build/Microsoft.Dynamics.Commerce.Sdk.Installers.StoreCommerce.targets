@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="Microsoft.Dynamics.Commerce.Sdk.Common.targets" Condition="'$(CommerceSdkCommonTargetsImported)' != 'true'" />
+  <Import Project="..\build\Microsoft.Dynamics.Commerce.Installers.MSBuild.targets" />
+
+  <!-- Import the custom MSBuild tasks: -->
+  <PropertyGroup>
+    <StoreCommerceCommonTaskAssembly Condition="'$(StoreCommerceCommonTaskAssembly)' == ''">$(MSBuildThisFileDirectory)\Microsoft.Dynamics.Commerce.Sdk.StoreCommerce.MSBuildTasks.dll</StoreCommerceCommonTaskAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Workaround for breaking changes in PackageDefinitions metadata. https://github.com/dotnet/sdk/issues/30809 -->
+    <!-- TODO: avoid of the PackageDefinitions usage. -->
+    <EmitLegacyAssetsFileItems>true</EmitLegacyAssetsFileItems>
+  </PropertyGroup>
+
+  <UsingTask TaskName="Microsoft.Dynamics.Commerce.Sdk.StoreCommerce.MSBuildTasks.GenerateExtensionPackageConfigFiles" AssemblyFile="$(StoreCommerceCommonTaskAssembly)" />
+
+  <!-- Gets the CommerceRuntime packaging output for the project and adds it to the 'CommercePackagingOutputsWithTargetPath' item group so that it will
+       be included in the output return by 'GetCommercePackagingOutput' -->
+  <Target Name="GetStoreCommerceInstallerPackagingOutput" BeforeTargets="GetCommercePackagingOutput" Condition="'$(OutputType)' == 'Exe'">
+    <ItemGroup>
+      <InstallerExecutable Include="$(MSBuildProjectDirectory)\$(OutputPath)\$(AssemblyName).exe">
+        <OutputType>$(CommercePackagingOutputTypeStoreCommerceExtensionInstaller)</OutputType>
+      </InstallerExecutable>
+    </ItemGroup>
+
+    <AssignTargetPath Files="@(InstallerExecutable)" RootFolder="$(MSBuildProjectDirectory)\$(OutputPath)">
+      <Output TaskParameter="AssignedFiles" ItemName="InstallerExecutableWithTargetPath" />
+    </AssignTargetPath>
+
+    <ItemGroup>
+      <CommercePackagingOutputsWithTargetPath Include="@(InstallerExecutableWithTargetPath)" />
+    </ItemGroup>
+  </Target>
+
+  <!--  *******************************************************************************************************************************************************
+        **************************************************** ZipFilesIncludePackagingOutputs ******************************************************************
+        *************************************************************************************************************************************************** -->
+  <PropertyGroup>
+    <!-- Default the CommerceRuntime extensions directory if it was not set in the project file. -->
+    <CommerceRuntimeExtensionsDirectoryName Condition="'$(CommerceRuntimeExtensionsDirectoryName)' == ''">CommerceRuntime</CommerceRuntimeExtensionsDirectoryName>
+    <!-- Default the HardwareStation extensions directory if it was not set in the project file. -->
+    <HardwareStationExtensionsDirectoryName Condition="'$(HardwareStationExtensionsDirectoryName)' == ''">HardwareStation</HardwareStationExtensionsDirectoryName>
+  </PropertyGroup>
+
+  <Target Name="ZipFilesIncludePackagingOutputs" BeforeTargets="RetailInstallerFrameworkCopyFilesToIntermediateOutputPath" DependsOnTargets="PrepareProjectReferences;">
+    <!-- Get the Commerce packaging output for all referenced projects. -->
+    <MSBuild
+      Projects="@(_MSBuildProjectReferenceExistent)"
+      Targets="GetCommercePackagingOutput"
+      Properties="%(_MSBuildProjectReferenceExistent.SetConfiguration); %(_MSBuildProjectReferenceExistent.SetPlatform); %(_MSBuildProjectReferenceExistent.SetTargetFramework)"
+      Condition="'@(_MSBuildProjectReferenceExistent)' != ''"
+      SkipNonexistentTargets="true" >
+
+      <Output TaskParameter="TargetOutputs" ItemName="_CommercePackagingOutputsWithTargetPath" />
+    </MSBuild>
+
+    <ItemGroup>
+      <_CommerceRuntimeAssemblyOutputsWithTargetPath Include="@(_CommercePackagingOutputsWithTargetPath)" Condition="'%(_CommercePackagingOutputsWithTargetPath.OutputType)' == '$(CommercePackagingOutputTypeCommerceRuntimeAssembly)'" />
+      <_CommerceRuntimeExtensionExternalArtifacts Include="@(_CommercePackagingOutputsWithTargetPath)" Condition="'%(_CommercePackagingOutputsWithTargetPath.OutputType)' == '$(CommercePackagingOutputTypeCommerceRuntimeExternalAssembly)'" />
+      <_HardwareStationAssemblyOutputsWithTargetPath Include="@(_CommercePackagingOutputsWithTargetPath)" Condition="'%(_CommercePackagingOutputsWithTargetPath.OutputType)' == '$(CommercePackagingOutputTypeHardwareStationAssembly)'" />
+      <_HardwareStationExtensionExternalArtifacts Include="@(_CommercePackagingOutputsWithTargetPath)" Condition="'%(_CommercePackagingOutputsWithTargetPath.OutputType)' == '$(CommercePackagingOutputTypeHardwareStationExternalAssembly)'" />
+      <_HardwareStationExtensionExternalContent Include="@(_CommercePackagingOutputsWithTargetPath)" Condition="'%(_CommercePackagingOutputsWithTargetPath.OutputType)' == '$(CommercePackagingOutputTypeHardwareStationExternalContent)'" />
+      <_ChannelDatabaseExtensionArtifacts Include="@(_CommercePackagingOutputsWithTargetPath)" Condition="'%(_CommercePackagingOutputsWithTargetPath.OutputType)' == '$(CommercePackagingOutputTypeChannelDatabaseScript)'" />
+      <_PosExtensionArtifacts Include="@(_CommercePackagingOutputsWithTargetPath)" Condition="'%(_CommercePackagingOutputsWithTargetPath.OutputType)' == '$(CommercePackagingOutputTypePosExtensionFile)'" />
+    </ItemGroup>
+
+    <!-- Generate the extension package config files based on the CommercePackagingOutput from referenced projects and include them in the app package. -->
+    <GenerateExtensionPackageConfigFiles
+      ProjectRootDirectory="$(MSBuildProjectDirectory)"
+      IntermediateOutputPath="$(IntermediateOutputPath)"
+      CommerceRuntimeExtensionsDirectoryName="$(CommerceRuntimeExtensionsDirectoryName)"
+      CommerceRuntimeAssemblyNames="@(_CommerceRuntimeAssemblyOutputsWithTargetPath->'%(TargetPath)')"
+      CommerceRuntimeSettings="@(CommerceRuntimeExtensionSettings)"
+      HardwareStationExtensionsDirectoryName="$(HardwareStationExtensionsDirectoryName)"
+      HardwareStationAssemblyNames="@(_HardwareStationAssemblyOutputsWithTargetPath->'%(TargetPath)')">
+
+      <Output TaskParameter="ConfigFilesWithTargetPath" ItemName="_ExtensionConfigFilesWithTargetPath" />
+    </GenerateExtensionPackageConfigFiles>
+
+    <ItemGroup>
+      <ZipFiles Include="@(_ExtensionConfigFilesWithTargetPath->'%(FullPath)')">
+        <Link>%(_ExtensionConfigFilesWithTargetPath.TargetPath)</Link>
+      </ZipFiles>
+      <!-- CommerceRuntime extensions are added in the CommerceRuntime Extensions Directory-->
+      <ZipFiles Include="@(_CommerceRuntimeAssemblyOutputsWithTargetPath->'%(FullPath)')">
+        <Link>$(CommerceRuntimeExtensionsDirectoryName)\%(_CommerceRuntimeAssemblyOutputsWithTargetPath.TargetPath)</Link>
+      </ZipFiles>
+      <!-- Add CommerceRuntime external assemblies in the CommerceRuntime extensions directory -->
+      <ZipFiles Include="@(_CommerceRuntimeExtensionExternalArtifacts->'%(FullPath)')">
+        <Link>$(CommerceRuntimeExtensionsDirectoryName)\%(_CommerceRuntimeExtensionExternalArtifacts.Filename)%(_CommerceRuntimeExtensionExternalArtifacts.Extension)</Link>
+      </ZipFiles>
+      <!-- HardwareStation extensions are added in the HardwareStation Extensions Directory-->
+      <ZipFiles Include="@(_HardwareStationAssemblyOutputsWithTargetPath->'%(FullPath)')">
+        <Link>$(HardwareStationExtensionsDirectoryName)\%(_HardwareStationAssemblyOutputsWithTargetPath.TargetPath)</Link>
+      </ZipFiles>
+      <!-- Add Hardware Station external assemblies in the Hardware Station extensions directory -->
+      <ZipFiles Include="@(_HardwareStationExtensionExternalArtifacts->'%(FullPath)')">
+        <Link>$(HardwareStationExtensionsDirectoryName)\%(_HardwareStationExtensionExternalArtifacts.Filename)%(_HardwareStationExtensionExternalArtifacts.Extension)</Link>
+      </ZipFiles>
+      <!-- Add Hardware Station external content in the Hardware Station extensions directory -->
+	    <ZipFiles Include="@(_HardwareStationExtensionExternalContent->'%(FullPath)')">
+        <Link>$(HardwareStationExtensionsDirectoryName)\%(_HardwareStationExtensionExternalContent.TargetPath)</Link>
+      </ZipFiles>
+      <ZipFiles Include="@(_ChannelDatabaseExtensionArtifacts->'%(FullPath)')">
+        <Link>OfflineDatabase\%(_ChannelDatabaseExtensionArtifacts.TargetPath)</Link>
+      </ZipFiles>
+      <ZipFiles Include="@(_PosExtensionArtifacts->'%(FullPath)')">
+        <Link>POS\%(_PosExtensionArtifacts.TargetPath)</Link>
+      </ZipFiles>
+    </ItemGroup>
+  </Target>
+
+  <!-- Delete copied intermediate files -->
+  <Target Name="CleanIntermediateFiles">
+    <Message Importance="high" Text="Removing the intermediate zip directory and the zip file." />
+    <RemoveDir Directories="$(IntermediateOutputPath)ZipFiles" />
+    <Delete Files="$(BaseIntermediateOutputPath)Setup.zip" />
+  </Target>
+
+  <PropertyGroup>
+    <CleanDependsOn>CleanIntermediateFiles;$(CleanDependsOn)</CleanDependsOn>
+  </PropertyGroup>
+
+  <!--  *******************************************************************************************************************************************************
+        ******************************************* SetCustomSourceCodeTransformationPreprocessorValue ********************************************************
+        *************************************************************************************************************************************************** -->
+  <Target Name="SetCustomSourceCodeTransformationPreprocessorValue" BeforeTargets="RunProduceContentAssets">
+    <!--
+    This target customizes the NuGet/MSBuild source code transformation logic to add a custom preprocessor value for the PackageName.
+    The preprocessor value is used by the MSbuild target linked below that generates the extension installer source file from the contentFile template included in the NuGet package.
+
+    NuGet Source File Transformation Reference: https://docs.microsoft.com/en-us/nuget/create-packages/source-and-config-file-transformations#specifying-source-code-transformations
+    RunProduceContentAssets MSBuild Target: https://github.com/dotnet/sdk/blob/main/src/Tasks/Microsoft.NET.Build.Tasks/targets/Microsoft.PackageDependencyResolution.targets#:~:text=%3CTarget%20Name%3D%22-,RunProduceContentAssets,-%22 
+    -->
+
+    <Error Condition="'$(PackageName)' == ''" Text="SetCustomSourceCodeTransformationPreprocessorValue Valdation Error: The 'PackageName' property value is not set. Please specify the Store Commerce extension package name." />
+
+    <ItemGroup>
+      <PreprocessorValue Include="packageName">
+        <!-- Case insensitive -->
+        <Value>$(PackageName)</Value>
+      </PreprocessorValue>
+    </ItemGroup>
+  </Target>
+
+  <!--  *******************************************************************************************************************************************************
+        ***************************************************** InstallStoreCommerceExtensions ******************************************************************
+        *************************************************************************************************************************************************** -->
+
+  <!-- If we are building inside visual studio and it is a debug build the default behavior is to run the installer after the build completes. -->
+  <PropertyGroup>
+    <InstallStoreCommerceExtensionsAfterBuild Condition="'$(InstallStoreCommerceExtensionsAfterBuild)' == '' AND '$(BuildingInsideVisualStudio)' == 'true' AND '$(Configuration)' == 'debug'">true</InstallStoreCommerceExtensionsAfterBuild>
+    <InstallStoreCommerceExtensionsArgs Condition="'$(InstallStoreCommerceExtensionsArgs)' == ''">--skipversioncheck=true</InstallStoreCommerceExtensionsArgs>
+  </PropertyGroup>
+  <Target Name="InstallStoreCommerceExtensions" AfterTargets="Build" Condition="'$(InstallStoreCommerceExtensionsAfterBuild)' == 'true'">
+    <Message Importance="high" Text="InstallStoreCommerceExtensions: Running the StoreCommerce extensions installer..." />
+    <Exec
+      ConsoleToMSBuild="true"
+      Command="powershell.exe -NonInteractive -Command &quot;&amp; { $(MSBuildProjectDirectory)\$(OutputPath)\$(AssemblyName).exe install $(InstallStoreCommerceExtensionsArgs) }&quot;"
+      LogStandardErrorAsError="true" ContinueOnError="false">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode"/>
+    </Exec>
+
+    <Message Importance="high" Text="InstallStoreCommerceExtensions: Running the StoreCommerce extensions installer completed successfully." />
+  </Target>
+
+  <!--  *******************************************************************************************************************************************************
+        ********************************************************* StoreCommerce-InitDev ***********************************************************************
+        *************************************************************************************************************************************************** -->
+  <Target Name="StoreCommerce-InitDev" AfterTargets="InitDev" DependsOnTargets="RunResolvePackageDependencies">
+    <PropertyGroup>
+      <CommerceSdkWorkspaceFolder Condition="'$(CommerceSdkWorkspaceFolder)' == ''">$(MSBuildStartupDirectory)</CommerceSdkWorkspaceFolder>
+      <StoreCommerceSolutionPathOrFolder Condition="'$(StoreCommerceSolutionPathOrFolder)' == '' AND '$(SolutionPath)' != ''">$(SolutionPath)</StoreCommerceSolutionPathOrFolder>
+      <StoreCommerceSolutionPathOrFolder Condition="'$(StoreCommerceSolutionPathOrFolder)' == '' AND '$(SolutionDir)' != ''">$(SolutionDir)</StoreCommerceSolutionPathOrFolder>
+      <StoreCommerceSolutionPathOrFolder Condition="'$(StoreCommerceSolutionPathOrFolder)' == ''">$(MSBuildStartupDirectory)</StoreCommerceSolutionPathOrFolder>
+      <StoreCommercePackageVersion Condition="'%(PackageDefinitions.Name)' == 'Microsoft.Dynamics.Commerce.Sdk.Installers.StoreCommerce'">%(PackageDefinitions.Version)</StoreCommercePackageVersion>
+    </PropertyGroup>
+
+    <!-- Check if powershell 6 or higher is installed on the machine. The exe name for powershell changed to pwsh with version 6 -->
+    <Exec Command="where /q pwsh.exe" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="WherePwshExitCode"/>
+    </Exec>
+
+    <PropertyGroup>
+      <!-- "where /q" command will return with an exit code of zero if pwsh.exe is found. Otherwise, we fallback to powershell.exe -->
+      <PowershellExeName Condition="'$(WherePwshExitCode)' == '0'">pwsh.exe</PowershellExeName>
+      <PowershellExeName Condition="'$(WherePwshExitCode)' != '0'">powershell.exe</PowershellExeName>
+    </PropertyGroup>
+
+    <Exec
+      ConsoleToMSBuild="true"
+      Command="$(PowershellExeName) -NonInteractive -Command &quot;&amp; { $(MSBuildThisFileDirectory)\..\commands\initDev\init-dev.ps1 '$(CommerceSdkWorkspaceFolder)' '$(StoreCommerceSolutionPathOrFolder)' '$(StoreCommercePackageVersion)' '$(MSBuildToolsPath)' }&quot;"
+      LogStandardErrorAsError="true" ContinueOnError="false">
+      <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode"/>
+    </Exec>
+  </Target>
+
+</Project>

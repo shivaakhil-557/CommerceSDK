@@ -1,0 +1,549 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsApplicationConfigElement">
+            <summary>
+            Diagnostics application config element.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsApplicationConfigElement.Name">
+            <summary>
+            Gets or sets the name of the application config property.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsApplicationConfigElement.Id">
+            <summary>
+            Gets or sets the unique identifier of the application config property.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsApplicationConfigElement.BuildVersion">
+            <summary>
+            Gets or sets the build version of the application config property.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsApplicationConfigElement.IsReadOnly">
+            <summary>
+            Checks if the ConfigurationElement is readonly or not.
+            </summary>
+            <returns>True if readonly.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsConfigSection">
+            <summary>
+            Config section for the Diagnostics infrastructure.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsConfigSection.Instance">
+            <summary>
+            Gets a singleton instance of the diagnostics config section.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsConfigSection.ApplicationConfigElement">
+            <summary>
+            Gets or sets the application information in the diagnostics config.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsConfigSection.WorkingDirectory">
+            <summary>
+            Gets or sets the diagnostics working directory configuration.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsConfigSection.EmergencySinkElement">
+            <summary>
+            Gets or sets the emergency sink configured in the diagnostics config.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsConfigSection.SinksCollection">
+            <summary>
+            Gets or sets the list of sinks configured in the diagnostics config.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsConfigSection.FilterConfigElement">
+            <summary>
+            Gets or sets the list of filters configured in the diagnostics config.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsConfigSection.Application">
+            <summary>
+            Gets the application information from the diagnostics config.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsConfigSection.EmergencySink">
+            <summary>
+            Gets the emergency sink configured in the diagnostics config.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsConfigSection.Sinks">
+            <summary>
+            Gets the list of configured sinks from the diagnostics config.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsConfigSection.Filter">
+            <summary>
+            Gets the filter information from the diagnostics config.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsConfigSection.RetrieveConfigSection">
+            <summary>
+            Retrieves the <see cref="T:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsConfigSection"/> config section.
+            </summary>
+            <returns>The config section that was retrieved.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsEventFilterConfigElement">
+            <summary>
+            Diagnostics event filter config element.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsEventFilterConfigElement.EventNameElement">
+            <summary>
+            Gets or sets the event name for the event filter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsEventFilterConfigElement.EventCodeElement">
+            <summary>
+            Gets or sets the event code for the event filter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsEventFilterConfigElement.EventVersionElement">
+            <summary>
+            Gets or sets the event version for the event filter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsEventFilterConfigElement.ActionElement">
+            <summary>
+            Gets or sets the action element for the event filter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsEventFilterConfigElement.Id">
+            <summary>
+            Gets the unique event id for the event filter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsEventFilterConfigElement.Action">
+            <summary>
+            Gets the action associated with the event filter.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsEventFilterElementCollection">
+            <summary>
+            Diagnostics config event filter element collection.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsEventFilterElementCollection.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsEventFilterElementCollection"/> class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsEventFilterElementCollection.CollectionType">
+            <summary>
+            Gets the collection type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsEventFilterElementCollection.ElementName">
+            <summary>
+            Gets the name of elements contained in the collection.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsEventFilterElementCollection.GetEnumerator">
+            <summary>
+            Retrieves an enumerator to iterate through the elements of the collection.
+            </summary>
+            <returns>The enumerator to iterate through the elements of the collection.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsEventFilterElementCollection.CreateNewElement">
+            <summary>
+            Creates a new instance of type <see cref="T:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsEventFilterConfigElement"/>.
+            </summary>
+            <returns>New instance of the type <see cref="T:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsEventFilterConfigElement"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsEventFilterElementCollection.GetElementKey(System.Configuration.ConfigurationElement)">
+            <summary>
+            Retrieves the element key for an element of type <see cref="T:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsEventFilterConfigElement"/>.
+            </summary>
+            <param name="element">The element for which to retrieve the key for.</param>
+            <returns>The key of the element.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsFilterConfigElement">
+            <summary>
+            Diagnostics filter config element.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsFilterConfigElement.MinLevelElement">
+            <summary>
+            Gets or sets the min level config element for the filter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsFilterConfigElement.EventFilterCollection">
+            <summary>
+            Gets or sets the diagnostics event filters config element collection.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsFilterConfigElement.MaxDataFieldValueLength">
+            <summary>
+            Gets or sets the max length for data field value.
+            </summary>
+            <remarks>Value of zero indicates no max value length is set.</remarks>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsFilterConfigElement.ExcludedPrivacyDataTypesElement">
+            <summary>
+            Gets or sets the excluded private data types config element for the filter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsFilterConfigElement.MinLevel">
+            <summary>
+            Gets the min level config property for the filter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsFilterConfigElement.ExcludedPrivacyDataTypes">
+            <summary>
+            Gets the excluded privacy data types for the filter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsFilterConfigElement.EventFilters">
+            <summary>
+            Gets the event filters for the filter.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement">
+            <summary>
+            Diagnostics sink config element.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement.PropertiesCollection">
+            <summary>
+            Gets or sets the diagnostics sinks properties config element collection.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement.Assembly">
+            <summary>
+            Gets or sets the assembly config property for the sink.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement.Class">
+            <summary>
+            Gets or sets the class config property for the sink.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement.FilterConfigElement">
+            <summary>
+            Gets or sets the filter config property for the sink.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement.Composition">
+            <summary>
+            Gets the composition related configuration property for the sink.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement.Properties">
+            <summary>
+            Gets the configuration properties defined for this sink.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement.Filter">
+            <summary>
+            Gets the filter configuration for this sink.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement.op_Equality(Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement,Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement)">
+            <summary>
+            Provides a mechanism to compare to sink config element.
+            </summary>
+            <param name="left">First sink config element.</param>
+            <param name="right">Second sink config element.</param>
+            <returns>Whether the two sink config elements are equal.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement.op_Inequality(Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement,Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement)">
+            <summary>
+            Provides a mechanism to compare to sink config element.
+            </summary>
+            <param name="left">First sink config element.</param>
+            <param name="right">Second sink config element.</param>
+            <returns>Whether the two sink config elements are not equal.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement.op_LessThan(Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement,Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement)">
+            <summary>
+            Provides a mechanism to compare to sink config element.
+            </summary>
+            <param name="left">First sink config element.</param>
+            <param name="right">Second sink config element.</param>
+            <returns>Whether the first sink config element is smaller than the sink config element.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement.op_LessThanOrEqual(Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement,Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement)">
+            <summary>
+            Provides a mechanism to compare to sink config element.
+            </summary>
+            <param name="left">First sink config element.</param>
+            <param name="right">Second sink config element.</param>
+            <returns>Whether the first sink config element is smaller or equals than the sink config element.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement.op_GreaterThan(Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement,Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement)">
+            <summary>
+            Provides a mechanism to compare to sink config element.
+            </summary>
+            <param name="left">First sink config element.</param>
+            <param name="right">Second sink config element.</param>
+            <returns>Whether the first sink config element is larger than the second sink config element.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement.op_GreaterThanOrEqual(Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement,Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement)">
+            <summary>
+            Provides a mechanism to compare to sink config element.
+            </summary>
+            <param name="left">First sink config element.</param>
+            <param name="right">Second sink config element.</param>
+            <returns>Whether the first sink config element is larger or equals than the second sink config element.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement.GetPropertyValue(System.String)">
+            <summary>
+            Retrieves a specific sink configuration property given the property name.
+            </summary>
+            <param name="name">The name of the configuration property.</param>
+            <returns>The value of the configuration property.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement.SetPropertyValue(System.String,System.String)">
+            <summary>
+            Sets the value of a specific property element with a given name.
+            </summary>
+            <param name="name">The name of the property.</param>
+            <param name="value">The value of the property.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement.TryGetPropertyValue(System.String,System.String@)">
+            <summary>
+            Retrieves a specific configuration property given the property name if it exists.
+            </summary>
+            <param name="name">The name of the configuration property.</param>
+            <param name="value">The value of the configuration property (if present).</param>
+            <returns>A flag indicating whether the property value was found.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement.GetHashCode">
+            <summary>
+            Creates an returns a hash to uniquely identify the sink config element.
+            </summary>
+            <returns>Unique sink config element hash.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement.Equals(Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement)">
+            <summary>
+            Provides a way to compare two sink config elements to check whether they are equal.
+            </summary>
+            <param name="other">The sink config element to compare against.</param>
+            <returns>True if the two sink config elements are equal, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement.Equals(System.Object)">
+            <summary>
+            Provides a way to compare two sink config elements to check whether they are equal.
+            </summary>
+            <param name="compareTo">The sink config element to compare against.</param>
+            <returns>True if the two sink config elements are equal, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement.CompareTo(System.Object)">
+            <summary>
+            Provides a way to compare two sink config elements.
+            </summary>
+            <param name="obj">The sink config element to compare against.</param>
+            <returns>
+            Negative number if the compared sink config element is smaller,
+            positive number if it is larger, and zero if they are equal.
+            </returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkElementCollection">
+            <summary>
+            Diagnostics sinks configuration element collection.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkElementCollection.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkElementCollection"/> class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkElementCollection.CollectionType">
+            <summary>
+            Gets the collection type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkElementCollection.ElementName">
+            <summary>
+            Gets the name of elements contained in the collection.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkElementCollection.GetEnumerator">
+            <summary>
+            Retrieves an enumerator to iterate through the elements of the collection.
+            </summary>
+            <returns>Enumerator to iterate through the elements of the collection.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkElementCollection.CreateNewElement">
+            <summary>
+            Creates a new instance of type <see cref="T:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement"/>.
+            </summary>
+            <returns>New instance of the type <see cref="T:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkElementCollection.GetElementKey(System.Configuration.ConfigurationElement)">
+            <summary>
+            Retrieves the element key for an element of type <see cref="T:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkConfigElement"/>.
+            </summary>
+            <param name="element">The element for which to retrieve the key for.</param>
+            <returns>The key of the element.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement">
+            <summary>
+            Diagnostics sink property config element.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement.Name">
+            <summary>
+            Gets or sets the name of the config property.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement.Value">
+            <summary>
+            Gets or sets the value of the config property.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement.op_Equality(Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement,Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement)">
+            <summary>
+            Provides a mechanism to compare to sink property config element.
+            </summary>
+            <param name="left">First sink property config element.</param>
+            <param name="right">Second sink property config element.</param>
+            <returns>Whether the two sink property config elements are equal.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement.op_Inequality(Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement,Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement)">
+            <summary>
+            Provides a mechanism to compare to sink property config element.
+            </summary>
+            <param name="left">First sink property config element.</param>
+            <param name="right">Second sink property config element.</param>
+            <returns>Whether the two sink property config elements are not equal.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement.op_LessThan(Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement,Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement)">
+            <summary>
+            Provides a mechanism to compare to sink property config element.
+            </summary>
+            <param name="left">First sink property config element.</param>
+            <param name="right">Second sink property config element.</param>
+            <returns>Whether the first sink property config element is smaller than the sink config element.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement.op_LessThanOrEqual(Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement,Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement)">
+            <summary>
+            Provides a mechanism to compare to sink property config element.
+            </summary>
+            <param name="left">First sink property config element.</param>
+            <param name="right">Second sink property config element.</param>
+            <returns>Whether the first sink property config element is smaller or equals than the sink config element.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement.op_GreaterThan(Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement,Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement)">
+            <summary>
+            Provides a mechanism to compare to sink property config element.
+            </summary>
+            <param name="left">First sink property config element.</param>
+            <param name="right">Second sink property config element.</param>
+            <returns>Whether the first sink property config element is larger than the second sink config element.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement.op_GreaterThanOrEqual(Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement,Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement)">
+            <summary>
+            Provides a mechanism to compare to sink property config element.
+            </summary>
+            <param name="left">First sink property config element.</param>
+            <param name="right">Second sink property config element.</param>
+            <returns>Whether the first sink property config element is larger or equals than the second sink config element.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement.GetHashCode">
+            <summary>
+            Creates an returns a hash to uniquely identify the sink property config element.
+            </summary>
+            <returns>Unique sink property config element hash.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement.Equals(Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement)">
+            <summary>
+            Provides a way to compare two sink property config elements to check whether they are equal.
+            </summary>
+            <param name="other">The sink property config element to compare against.</param>
+            <returns>True if the two sink property config elements are equal, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement.Equals(System.Object)">
+            <summary>
+            Provides a way to compare sink property config elements to check whether they are equal.
+            </summary>
+            <param name="compareTo">The sink property config element to compare against.</param>
+            <returns>True if the two sink property config elements are equal, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement.CompareTo(System.Object)">
+            <summary>
+            Provides a way to compare two sink property config elements.
+            </summary>
+            <param name="obj">The sink property config element to compare against.</param>
+            <returns>
+            Negative number if the compared sink property config element is smaller,
+            positive number if it is larger, and zero if they are equal.
+            </returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyElementCollection">
+            <summary>
+            Diagnostics sinks configuration property element collection.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyElementCollection.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyElementCollection"/> class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyElementCollection.CollectionType">
+            <summary>
+            Gets the collection type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyElementCollection.ElementName">
+            <summary>
+            Gets the name of elements contained in the collection.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyElementCollection.IsReadOnly">
+            <summary>
+            Returns a flag indicating whether the config is read only.
+            </summary>
+            <returns>Flag indicating whether the config is read only.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyElementCollection.Add(System.Configuration.ConfigurationElement)">
+            <summary>
+            Adds a new config element to the collection.
+            </summary>
+            <param name="configElement">The config element to be added to the collection.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyElementCollection.GetEnumerator">
+            <summary>
+            Retrieves an enumerator to iterate through the elements of the collection.
+            </summary>
+            <returns>The enumerator to iterate through the elements of the collection.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyElementCollection.CreateNewElement">
+            <summary>
+            Creates a new instance of type <see cref="T:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement"/>.
+            </summary>
+            <returns>New instance of the type <see cref="T:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyElementCollection.GetElementKey(System.Configuration.ConfigurationElement)">
+            <summary>
+            Retrieves the element key for an element of type <see cref="T:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsSinkPropertyConfigElement"/>.
+            </summary>
+            <param name="element">The element for which to retrieve the key for.</param>
+            <returns>The key of the element.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsWorkingDirectoryConfigElement">
+            <summary>
+            Diagnostics working directory config element.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsWorkingDirectoryConfigElement.Path">
+            <summary>
+            Gets or sets the path to the diagnostics working directory.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Retail.Diagnostics.Core.Desktop.DiagnosticsWorkingDirectoryConfigElement.CreateIfNotExists">
+            <summary>
+            Gets or sets a value indicating whether the diagnostics working directory
+            should be created if it does not exist.
+            </summary>
+        </member>
+    </members>
+</doc>

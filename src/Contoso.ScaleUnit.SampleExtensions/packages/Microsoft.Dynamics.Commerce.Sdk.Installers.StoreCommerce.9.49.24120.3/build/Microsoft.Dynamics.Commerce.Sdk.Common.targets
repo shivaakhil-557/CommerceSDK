@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <CommerceSdkCommonTargetsImported>true</CommerceSdkCommonTargetsImported>
+  </PropertyGroup>
+
+  <!-- Gets the Commerce packaging output for the current project. The target returns the complete set of packaging outputs for the different types of components in the SDK.
+       Component packages should define a target to run before GetCommercePackagingOutput and add packaging output items to the 'CommercePackagingOutputsWithTargetPath' item group.
+       Each packaging output item is expected to contain 'TargetPath' and 'OutputType' metadata so that the output can be handled appropriately by referencing projects. -->
+  <Target Name="GetCommercePackagingOutput" Returns="@(CommercePackagingOutputs)">
+    <ItemGroup>
+      <CommercePackagingOutputs Include="@(CommercePackagingOutputsWithTargetPath)" />
+    </ItemGroup>
+  </Target>
+
+  <!--
+    Default implementation for the InitDev target is a no-op.
+    Component packages can attach to the InitDev target using AfterTargets="InitDev" to run scrpts to initialize the solution development for that project type.
+    This will enable Commerce SDK developers to initialize the development experience for all the projects in their solution by running a single msbuild command.
+    Ex. msbuild MyCommerceSdkSolution.sln /t:InitDev
+  -->
+  <Target Name="InitDev">
+  </Target>
+</Project>

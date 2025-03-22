@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\build\Microsoft.Dynamics.Commerce.Sdk.Common.props" Condition="'$(CommerceSdkCommonPropsImported)' != 'true'" />
+  <Import Project="..\build\Microsoft.Dynamics.Commerce.Installers.MSBuild.props" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net472</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AssemblyMetadata Include="CommerceSdkSelfServicePackageType" Value="StoreCommerce" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,2841 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Dynamics.Commerce.Installers.Framework</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.BaseAction">
+            <summary>
+            This class defines the common arguments expected in any action.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.BaseAction.LogDirectoryPath">
+            <summary>
+            Gets or sets the value of the loggging path.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.BaseAction.ConfigurationFilePath">
+            <summary>
+            Specify the location and file name of the configuration file.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.BaseAction.Verbosity">
+            <summary>
+            Gets or sets the verbosity for logs.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.BaseAction.InstrumentationKey">
+            <summary>
+            Gets or sets InstrumentationKey - a GUID value that uniquely identifies an ApplicationInsights store.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.InstallAction">
+            <summary>
+            Command line sub-option class for installation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.InstallAction.SkipVersionCheck">
+            <summary>
+            Skips the validation that the system is being downgraded.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.InstallAction.SkipUrlCheck">
+            <summary>
+            Skip the validation of URLs passed to the installer.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.InstallAction.SkipTelemetryCheck">
+            <summary>
+            Skip the validation of Telemetry endpoints used by the application being installed.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.MaintenanceAction">
+            <summary>
+            Base class for the maintenance actions.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.Operation">
+            <summary>
+            A definition of an operation.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Operation.#ctor(System.Type,Microsoft.Dynamics.Commerce.Installers.Framework.StepDefinition[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.Operation" /> class.
+            </summary>
+            <param name="actionType">The type of the action is associated with this operation. This must be a type that inherits from <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.BaseAction" />.</param>
+            <param name="steps">The operation steps.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Operation.#ctor(System.Type,System.Func{System.Collections.Generic.IEnumerable{Microsoft.Dynamics.Commerce.Installers.Framework.StepDefinition}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.Operation" /> class.
+            </summary>
+            <param name="actionType">The type of the action is associated with this operation. This must be a type that inherits from <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.BaseAction" />.</param>
+            <param name="steps">The function creating the operation's steps.</param>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.Operation.ActionType">
+            <summary>
+            Gets the action type value.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.Operation.StepsDefinitions">
+            <summary>
+            Gets the value for the steps.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.StepDefinition">
+            <summary>
+            Holds an Installer Step and an optional execution condition.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.StepDefinition.#ctor(Microsoft.Dynamics.Commerce.Installers.Framework.IInstallerStep)">
+            <summary>
+            Creates instance of the class.
+            </summary>
+            <param name="step">The step to execute.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.StepDefinition.#ctor(Microsoft.Dynamics.Commerce.Installers.Framework.IInstallerStep,System.Func{Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext,System.Boolean})">
+            <summary>
+            Creates instance of the class.
+            </summary>
+            <param name="step">The step to execute.</param>
+            <param name="condition">The execution condition.</param>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.StepDefinition.Condition">
+            <summary>
+            The condition defining whether the step should be executed or not.
+            </summary>
+            <remarks>If the condition is not initialized it will be interpreted as the condition was evaluated to True.</remarks>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.StepDefinition.Step">
+            <summary>
+            Gets the installer step.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.UninstallAction">
+            <summary>
+            Command line sub-option class for installation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.UninstallAction.CleanupInstallerBackupOnSuccess">
+            <summary>
+            Gets or sets a value indicating whether the Installer backup executable needs to be cleaned up.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.BaseGroupValidatorAttribute">
+            <summary>
+            Indicates that the parameter needs to be provided either by command-line or configuration file.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.BaseGroupValidatorAttribute.DefaultOrder">
+            <summary>
+            The default order used for the groups.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.BaseGroupValidatorAttribute.Order">
+            <summary>
+            A number that defines the order of group validation processing.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.BaseGroupValidatorAttribute.GroupName">
+            <summary>
+            The group name that describes the options group.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.BaseGroupValidatorAttribute.OptionRole">
+            <summary>
+            The option role.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.BaseGroupValidatorAttribute.#ctor(System.Int32,System.String,System.String)">
+            <summary>
+            Marks the option as belonging to a group which must be supplied via one of its members.
+            </summary>
+            <param name="order">A number that defines the order of group validation processing.</param>
+            <param name="groupName">The group name.</param>
+            <param name="optionRole">The option role within a group.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.BaseGroupValidatorAttribute.#ctor(System.String,System.String)">
+            <summary>
+            Marks the option as belonging to a group which must be supplied via one of its members.
+            Group order is assigned to zero.
+            </summary>
+            <param name="groupName">The group name.</param>
+            <param name="optionRole">The option role within a group.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.BaseGroupValidatorAttribute.Validate(System.String,System.Collections.Generic.IEnumerable{Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.GroupValidationDescriptor},Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Validates that path passed to the installer exists.
+            </summary>
+            <param name="groupName">The name of the group.</param>
+            <param name="descriptors">The descriptors of the options constituting the group.</param>
+            <param name="configuration">The installer configuration.</param>
+            <param name="logger">The logger to use.</param>
+            <returns>The validation result.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.BaseValidatorAttribute">
+            <summary>
+            Indicates that the parameter needs to be validated.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.BaseValidatorAttribute.Validate(System.String,System.Boolean,Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Validates the value of the property annotated with the attribute.
+            </summary>
+            <param name="parameterName">The parameter name.</param>
+            <param name="isRequired">The flag indicating that the parameter is required.</param>
+            <param name="context">The context.</param>
+            <returns>The validation result.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.GenericValidationDescriptor`1">
+            <summary>
+            The class containing the information required to validate an input parameter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.GenericValidationDescriptor`1.ParameterName">
+            <summary>
+            The parameter name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.GenericValidationDescriptor`1.IsRequired">
+            <summary>
+            The flag indicating that the parameter is required.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.GenericValidationDescriptor`1.Attribute">
+            <summary>
+            The attribute instance.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.GenericValidationDescriptor`1.#ctor(System.String,System.Boolean,`0)">
+            <summary>
+            Initializes a new instance of the ValidationDescriptor.
+            This class is not intended to be inherited directly.
+            We have the subclasses that define the public constructors, these subclasses can be derived.
+            </summary>
+            <param name="parameterName">The parameter name.</param>
+            <param name="isRequired">The flag indicating that the parameter is required.</param>
+            <param name="attribute">The attribute instance.</param>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.GroupValidationDescriptor">
+            <summary>
+            The class containing the information required to validate a group of input parameters.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.GroupValidationDescriptor.#ctor(System.String,System.Boolean,Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.BaseGroupValidatorAttribute)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.RequiredCertificateAttribute">
+            <summary>
+            Indicates that the parameter needs to be provided either by command-line or configuration file.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.RequiredCertificateAttribute.CertificateThumbprint">
+            <summary>
+            The logical name of the of options that contain a certificate thumbprint.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.RequiredCertificateAttribute.CertificateFullPath">
+            <summary>
+            The logical name of the of options that contain a certificate full path.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.RequiredCertificateAttribute.#ctor(System.Int32,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.RequiredCertificateAttribute"/> class.
+            </summary>
+            <param name="order">A number that defines the order of group validation processing.</param>
+            <param name="groupName">The group name.</param>
+            <param name="optionRole">The option role within a group.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.RequiredCertificateAttribute.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.RequiredCertificateAttribute"/> class.
+            Group order is assigned to zero.
+            </summary>
+            <param name="groupName">The group name.</param>
+            <param name="optionRole">The option role within a group.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.RequiredCertificateAttribute.Validate(System.String,System.Collections.Generic.IEnumerable{Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.GroupValidationDescriptor},Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.RequiredOptionAttribute">
+            <summary>
+            Indicates that the option must be provided either by command-line or configuration file.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidateEndpointIsReachableAttribute">
+            <summary>
+            Indicates that the parameter needs to be validated as an endpoint Uri.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidateEndpointIsReachableAttribute.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidateEndpointIsReachableAttribute.HttpMethod">
+            <summary>
+            Gets the <see cref="T:System.Net.Http.HttpMethod"/> that will be used for probing the endpoint.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidateEndpointIsReachableAttribute.Suffix">
+            <summary>
+            Gets the suffix that will be appended to the endpoint address when probing.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidateEndpointIsReachableAttribute.#ctor(Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidationHttpMethod,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidateEndpointIsReachableAttribute"/> class.
+            </summary>
+            <param name="validationHttpMethod">The <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidationHttpMethod"/> to use.</param>
+            <param name="suffix">The suffix to append to the address value during the validation.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidateEndpointIsReachableAttribute.Validate(System.String,System.Boolean,Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Validates that URL passed to the installer is reachable.
+            </summary>
+            <param name="parameterName">The parameter name.</param>
+            <param name="isRequired">The flag indicating that the parameter is required.</param>
+            <param name="context">The installer step context.</param>
+            <returns>The validation result.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidatePathExistsAttribute">
+            <summary>
+            Indicates that the parameter needs to be validated as a file system path.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidatePathExistsAttribute.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidatePathExistsAttribute.Validate(System.String,System.Boolean,Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Validates that path passed to the installer exists.
+            </summary>
+            <param name="parameterName">The parameter name.</param>
+            <param name="isRequired">The flag indicating that the parameter is required.</param>
+            <param name="context">The installer step context.</param>
+            <returns>The validation result.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidationDescriptor">
+            <summary>
+            The class containing the information required to validate an input parameter.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidationDescriptor.#ctor(System.String,System.Boolean,Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.BaseValidatorAttribute)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidationHttpMethod">
+            <summary>
+            Represents the HttpMethods supported by validator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidationHttpMethod.Get">
+            <summary>
+            Corresponds to <see cref="P:System.Net.Http.HttpMethod.Get"/>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidationHttpMethod.Post">
+            <summary>
+            Corresponds to <see cref="P:System.Net.Http.HttpMethod.Post"/>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidationHttpMethod.Head">
+            <summary>
+            Corresponds to <see cref="P:System.Net.Http.HttpMethod.Head"/>
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidationResult">
+            <summary>
+            Represents a container for the results of a validation request.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidationResult.Success">
+            <summary>
+            Represents the success of the validation (<code>true</code> if validation was successful; otherwise, <code>false</code>).
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidationResult.ErrorMessage">
+            <summary>
+            Gets the error message for the validation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidationResult.InnerException">
+            <summary>
+            Gets the exception that occurred during the validation (if any).
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidationResult.Skip">
+            <summary>
+            Gets the flag that controls whether the exception will be raised or skipped if the validation is failed.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidationResult.#ctor(System.Boolean,System.String,System.Exception,System.Boolean)">
+            <summary>
+            Initializes a new instance of the ValidationResult class.
+            </summary>
+            <param name="success">The success state of the validation.</param>
+            <param name="errorMessage">The error message returned by validation.</param>
+            <param name="innerException">The exception that occurred during the validation.</param>
+            <param name="skip">The flag that controls whether the exception will be raised or skipped if the validation is failed.</param>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.CommandLineConfigurationProvider">
+            <summary>
+            The configuration provider class that parse command line arguments.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.CommandLineConfigurationProvider.#ctor(System.String[],System.Type[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.CommandLineConfigurationProvider"/> class.
+            </summary>
+            <param name="args">The collection of application input arguments.</param>
+            <param name="verbActionTypes">The types that define the available command line options.</param>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.CommandLineConfigurationProvider.Action">
+            <summary>
+            Gets the action that was elected in the command line arguments. If there was a parsing error, this value will be null.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.CommandLineConfigurationProvider.Errors">
+            <summary>
+            Gets the parsing errors associated with the provided command line input. This collection will be empty if there was no error.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.CommandLineConfigurationProvider.Values">
+            <summary>
+            The command line parameters parsed in a key-value pair format.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.CommandLineConfigurationProvider.Load">
+            <summary>
+            Load and put input arguments into Dictionary.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.CommandLineConfigurationProvider.RunParsedAction(System.Object)">
+            <summary>
+            This method will run when the parsing was successful.
+            </summary>
+            <param name="parsedAction">The verb action instance parsed.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.CommandLineConfigurationProvider.RunParsingError(System.Collections.Generic.IEnumerable{CommandLine.Error})">
+            <summary>
+            This method will run if there is a parsing error.
+            </summary>
+            <param name="errors">The parsing errors.</param>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ConfigurationBuilderExtensions">
+            <summary>
+            The extension class that adds configuration source to the CofigurationBuilder
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ConfigurationBuilderExtensions.AddInstallerFrameworkXmlProvider(Microsoft.Extensions.Configuration.IConfigurationBuilder,System.IO.Abstractions.IFileSystem,System.String)">
+            <summary>
+            Adds the AddInstallerFrameworkXmlProvider to builder.
+            </summary>
+            <param name="builder">The configuration builder.</param>
+            <param name="fileSystem">The file system to use.</param>
+            <param name="filePath">The configuration file path.</param>
+            <returns>IConfigurationBuilder</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ConfigurationBuilderExtensions.AddEmbeddedFile(Microsoft.Extensions.Configuration.IConfigurationBuilder,System.Reflection.Assembly,System.String)">
+            <summary>
+            Adds the InstallerFrameworkEmbeddedConfigurationProvider to builder.
+            </summary>
+            <param name="builder">The configuration builder.</param>
+            <param name="assembly">The assembly.</param>
+            <param name="fileName">The configuration file name</param>
+            <returns>IConfigurationBuilder</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ConfigurationBuilderExtensions.AddRegistry(Microsoft.Extensions.Configuration.IConfigurationBuilder,Microsoft.Dynamics.Commerce.Installers.Framework.IRegistryKeyService,System.String,System.String)">
+            <summary>
+            Adds a registry node's keys and values as keys and values of a confgiuration section.
+            To add it to sub-sections, use the collon (:) separator.
+            </summary>
+            <param name="builder">The configuration builder.</param>
+            <param name="registryKeyService">The registry service.</param>
+            <param name="registryPath">The path to the registry node.</param>
+            <param name="sectionName">The configuration section name the registry value should be added to.</param>
+            <returns>The builder instance.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.EmbeddedConfigurationProvider">
+            <summary>
+            The configuration provider class that help read in configuration file embeded in the installer assembly.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.EmbeddedConfigurationProvider.#ctor(System.Reflection.Assembly,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.EmbeddedConfigurationProvider"/> class.
+            </summary>
+            <param name="assembly">The assembly service</param>
+            <param name="fileName">The configuration file name.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.EmbeddedConfigurationProvider.Load">
+            <summary>
+            Load and put configuration File content into Dictionary.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.EmbeddedConfigurationProvider.GetConfigurationFileContent(System.String)">
+            <summary>
+            Get configuration file content.
+            </summary>
+            <param name="resourceName">Resource Name</param>
+            <returns>Dictionary deserialized from the configuration file</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.GenericConfigurationSource">
+            <summary>
+            A generic configuration source capable of loading any provider.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.GenericConfigurationSource.#ctor(Microsoft.Extensions.Configuration.IConfigurationProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.GenericConfigurationSource"/> class.
+            </summary>
+            <param name="provider">The configuration provider.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.GenericConfigurationSource.Build(Microsoft.Extensions.Configuration.IConfigurationBuilder)">
+            <summary>
+            Builds the configuration source.
+            </summary>
+            <param name="builder">The Microsoft.Extensions.Configuration.IConfigurationBuilder to add to.</param>
+            <returns>The Microsoft.Extensions.Configuration.IConfigurationBuilder.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.Configurations.StandardConfigurationKeys">
+            <summary>
+            This class contains Standard Configuration Key names.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.Configurations.StandardConfigurationKeys.ActionName">
+            <summary>
+            Standard Configuration Key for an Installer Action Name.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.XmlConfigurationProvider">
+            <summary>
+            The configuration source class that help read in xml file with repeated elements
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.XmlConfigurationProvider.#ctor(System.IO.Abstractions.IFileSystem,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.XmlConfigurationProvider"/> class.
+            </summary>
+            <param name="fileSystem">The file system to use.</param>
+            <param name="filePath">The file path.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.XmlConfigurationProvider.Load">
+            <summary>
+            Load Xml File content into Dictionary.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ExitCode">
+            <summary>
+            The list of exit codes managed by the framework.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.ExitCode.Success">
+            <summary>
+            Exit code for success scenarios.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.ExitCode.FrameworkUnhandledError">
+            <summary>
+            Unhandled error, uncaught by the framework. This means that the framework was not able to handle this error. This is not used in the framework code itself.
+            It is defiend here for completion. The Program.cs on MSBuild project will return -1 when the framework itself throws an exception.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.ExitCode.UnhandledError">
+            <summary>
+            Unexpected error, caught by the framework. This identifies an unexpected error thrown by the framework or the setup application.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.ExitCode.CommandLineArgumentParsingError">
+            <summary>
+            The code reported when the arguments provided by the user are invalid / unexpected.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.ExitCode.GenericError">
+            <summary>
+            A generic error.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.ExitCode.BaseProductNotInstalled">
+            <summary>
+            Indicates that the extension installation failed because the base product (Microsoft component) is not installed.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.ExitCode.ExtensionsAreNotUninstalled">
+            <summary>
+            Indicates that the extension uninstallation failed because the extension(custom component) of base product (Microsoft component) is not uninstalled.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.ExitCode.LegacyProductIsNotUninstalled">
+            <summary>
+            Indicates that the product installation failed because the legacy product (Microsoft component) is not uninstalled.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.ExitCode.LastReservedErrorCode">
+            <summary>
+            Unused value. This is the highest error code used by the framework. Specific installers should use values above this number.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ExtensionSetup">
+            <summary>
+            Interface for an extension installer setup.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.ExtensionSetup.ExtensionName">
+            <summary>
+            Gets the value for the extension name.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.Helpers.ConfigurationExtensions">
+            <summary>
+            Contains the extensions for the <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> interface.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Helpers.ConfigurationExtensions.GetBaseProductConfiguration(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Returns the base product configuration.
+            Only applicable to the extensions, will return the empty configuration if called from the base product installers.
+            </summary>
+            <param name="configuration">The <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> instance to get data from.</param>
+            <returns>Returns the base product configuration. Never returns <code>null</code>.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Helpers.ConfigurationExtensions.GetProductConfiguration(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Returns the current product configuration.
+            Applicable to both extensions and base products.
+            </summary>
+            <param name="configuration">The <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> instance to get data from.</param>
+            <returns>Returns the current product configuration. Never returns <code>null</code>.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.Helpers.FileSystemExtender">
+            <summary>
+            Contains the extensions of file system abstractions.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.Helpers.FileSystemExtender.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Helpers.FileSystemExtender.DeleteFile(System.String)">
+            <summary>
+            Deletes the file.
+            </summary>
+            <param name="directoryPath">The file to delete.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Helpers.FileSystemExtender.DeleteDirectory(System.IO.Abstractions.IDirectory,System.String)">
+            <summary>
+            Deletes the directory.
+            </summary>
+            <param name="directory">The</param>
+            <param name="directoryPath">The directory to delete.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Helpers.FileSystemExtender.DeleteDirectory(System.String)">
+            <summary>
+            Deletes the directory.
+            </summary>
+            <param name="directoryPath">The directory to delete.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Helpers.FileSystemExtender.DeleteWithExclusions(System.String,System.Collections.Generic.IEnumerable{System.String},Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Delete only the files that were previously installed (any new file or directory will not be deleted).
+            </summary>
+            <param name="directoryPath">The installation directory.</param>
+            <param name="excludedPaths">The paths to exclude.</param>
+            <param name="logger">The logger to use.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Helpers.FileSystemExtender.DeleteFileOrDirectory(System.String,System.Boolean)">
+            <summary>
+            Deletes a file or directory.
+            </summary>
+            <param name="path">The path to delete.</param>
+            <param name="isItFolder">The path is folder.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Helpers.FileSystemExtender.ThrowIfFileNotFound(System.IO.Abstractions.IFile,System.String,System.String)">
+            <summary>
+            Throws an <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerException"/> if the file was not found.
+            </summary>
+            <param name="fileAbstraction">The File abstraction to use</param>
+            <param name="fileName">The name of file to check.</param>
+            <param name="fileDescription">The description to include in log message.</param>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.Helpers.WebServerHelper.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Helpers.WebServerHelper.WaitForState(System.Func{Microsoft.Web.Administration.ObjectState},Microsoft.Web.Administration.ObjectState,System.TimeSpan,System.String)">
+            <summary>Waits for the object to reach the specified status or for the specified time-out to expire.</summary>
+            <param name="stateRetriever">A function to retrieve the object state.</param>
+            <param name="desiredState">A state to wait for.</param>
+            <param name="timeout">A <see cref="T:System.TimeSpan" /> object specifying the amount of time to wait for the site to reach the specified status.</param>
+            <param name="objectName">A name of the target object being started or stopped.</param>
+            <exception cref="T:System.ServiceProcess.TimeoutException">The value specified for the <paramref name="timeout" /> parameter expires.</exception>
+            <exception cref="T:System.ArgumentNullException">The value of the <paramref name="stateRetriever" /> callback function is null.</exception>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.Helpers.CertificateHelper">
+            <summary>
+            The helper class to perform the basic Certificate tasks.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.Helpers.CertificateHelper.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Helpers.CertificateHelper.ValidateDates(System.Security.Cryptography.X509Certificates.X509Certificate2,Microsoft.Extensions.Logging.ILogger,System.String,System.Boolean)">
+            <summary>
+            Validate that certificate dates are valid.
+            </summary>
+            <param name="certificate">The certificate to validate.</param>
+            <param name="logger">The logger to use.</param>
+            <param name="certificateDescription">The certificate short description to include in the log messages.</param>
+            <param name="throwIfExpired">Throw an <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerException"/> if the certificate is expired.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Helpers.CertificateHelper.GetCertificate(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext,System.Uri)">
+            <summary>
+            Gets the certificate from the specified location.
+            </summary>
+            <param name="context">The installer context to use.</param>
+            <param name="certificateLocation">The location of certificate to retrieve from.</param>
+            <returns>The certificate retrieved.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Helpers.CertificateHelper.GetCertificateByThumbprint(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext,System.Byte[],System.String,System.String)">
+            <summary>
+            Gets the certificate by the specified thumbprint.
+            </summary>
+            <param name="context">The installer context to use</param>
+            <param name="thumbprint">The thumbprint of the certificate to retrieve.</param>
+            <param name="storeName">The store name to use, default is "My".</param>
+            <param name="storeLocation">The store location to use, default is "LocalMachine"</param>
+            <returns>The certificate retrieved.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.Helpers.CertificateHelper.ByteArrayToHexString(System.Byte[])">
+            <summary>
+            Converts the byte array to hexadecimal uppercase string suitable for passing as a part of the certificate location.
+            </summary>
+            <param name="thumbprint">The certificate thumbprint.</param>
+            <returns>The string representation of the thumbprint.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.EndpointContainerHelper">
+            <summary>
+            Helper class for telemetry endpoint container.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.EndpointContainerHelper.GetDefaultTelemetryIngestionEndpointAndHttpMethod(Microsoft.ApplicationInsights.Extensibility.Implementation.Endpoints.EndpointContainer)">
+            <summary>
+            Gets default telemetry ingestion endpoint and its http method to access the endpoint.
+            </summary>
+            <param name="endpointContainer">The class containing endpoint values.</param>
+            <returns>Default telemetry endpoint and http method to access the endpoint.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.IInstallerFramework">
+            <summary>
+            Installer InstallerFramework interface.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IInstallerFramework.Run">
+            <summary>
+            Run the deployment steps.
+            </summary>
+            <returns>A task with the exit code.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.InstallationRecord">
+            <summary>
+            Represents an installation record.
+            </summary>
+            <remarks>This class follows the definition provided here: <see href="https://docs.microsoft.com/en-us/windows/win32/msi/uninstall-registry-key" />.</remarks>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.InstallationRecord.DisplayName">
+            <summary>
+            Gets or sets the display name shown for this component/extension.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.InstallationRecord.Publisher">
+            <summary>
+            Gets or sets the publisher.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.InstallationRecord.DisplayVersion">
+            <summary>
+            Gets the installed version.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.InstallationRecord.InstallSource">
+            <summary>
+            Gets the installer assembly/executable directory path.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.InstallationRecord.InstallLocation">
+            <summary>
+            Gets the path to the application root folder.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.InstallationRecord.DisplayIcon">
+            <summary>
+            Gets the path to the display icon.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.InstallationRecord.InstallDate">
+            <summary>
+            Gets the path to the last install date.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.InstallationRecord.UninstallString">
+            <summary>
+            Gets the command line to be executed to uninstall.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerException">
+            <summary>
+            Defines an exception that is handled by the installer process, i.e. an expected failure scenario; as opposed to an unexpected failure in the installer code.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerException.#ctor(System.String,System.Int32,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerException" /> class.
+            </summary>
+            <param name="message">The exception message.</param>
+            <param name="exitCode">The exit code to be used to terminate the process.</param>
+            <param name="innerException">The inner exception, if any.</param>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerException.ExitCode">
+            <summary>
+            Gets the exit code to be used to terminate the process.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerFramework">
+            <summary>
+            Installer Framework class that arrange configuration, set up logging,
+            and run the pre-defined deployment steps as well as the steps provided by the installer.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerFramework.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerFramework.InstrumentationKey">
+            <summary>
+            Gets the value for Instrumentation Key.
+            The Instrumentation Key value is the same for all installers using the installer framework.
+            Correlation Id will be used to differentiate the installations.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerFramework.BaseProductInstallationRecordConfigurationKey">
+            <summary>
+            This is the key used to track the base (Microsoft product) installation record.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerFramework.InstallationRecordConfigurationKey">
+            <summary>
+            This is the key used to track the installer (either base or extension) installation record.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerFramework.Run">
+            <summary>
+            Run the deployment steps.
+            </summary>
+            <returns>A task with the exit code.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerFramework.Run(System.Reflection.Assembly,System.String[])">
+            <summary>
+            Run the deployment steps.
+            </summary>
+            <param name="installerAssembly">The assembly that will be used as the installer reference.</param>
+            <param name="args">The collection of application input arguments.</param>
+            <returns>A task with the exit code.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerFramework.Run(System.Reflection.Assembly,System.IO.Abstractions.IFileSystem,System.String[])">
+            <summary>
+            Run the deployment steps.
+            </summary>
+            <param name="installerAssembly">The assembly that will be used as the installer reference.</param>
+            <param name="fileSystem">The file system abstraction to use.</param>
+            <param name="args">The collection of application input arguments.</param>
+            <returns>A task with the exit code.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerFramework.ValidateRequiredConfigurationParameters(Microsoft.Dynamics.Commerce.Installers.Framework.BaseAction,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Validates that the options marked with <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.RequiredOptionAttribute"/> were provided
+            via the command-line or configuration file.
+            </summary>
+            <param name="action">The action instance to check for required properties.</param>
+            <param name="configuration">The configuration to read the values from.</param>
+            <param name="logger">The logger to use.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerFramework.Dispose">
+            <summary>
+            Dispose method.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerFramework.ParseCommandLineArguments(System.String[],Microsoft.Dynamics.Commerce.Installers.Framework.SetupBase,Microsoft.Dynamics.Commerce.Installers.Framework.CommandLineConfigurationProvider@,Microsoft.Dynamics.Commerce.Installers.Framework.BaseAction@)">
+            <summary>
+            Parse the command line arguments.
+            </summary>
+            <param name="args">The collection of application input arguments.</param>
+            <param name="setup">The installer setup instance.</param>
+            <param name="provider">Output parameter for the provider used to parse the command line.</param>
+            <param name="action">Output parameter, in case of success, this is a not null object instance containing the parsed data.</param>
+            <returns>A value indicating whether the parsing of the command line was successful. A false value indicates the command line input was invalid.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerFramework.BuildConfiguration(Microsoft.Dynamics.Commerce.Installers.Framework.SetupBase,System.String,Microsoft.Dynamics.Commerce.Installers.Framework.CommandLineConfigurationProvider,System.String,Microsoft.Extensions.DependencyInjection.ServiceProvider,System.Reflection.Assembly)">
+            <summary>
+            Build the Installer Framework Configuration.
+            </summary>
+            <param name="installerSetup">The installer setup.</param>
+            <param name="extensionName">The name of the extension, if any, or null, if not an extension.</param>
+            <param name="commandLineProvider">The command line provider.</param>
+            <param name="configurationFilePath">The configuration file path (if explicitly provided).</param>
+            <param name="serviceProvider">The service provider used to request service instances.</param>
+            <param name="installerAssembly">The assembly that contains the installer setup.</param>
+            <returns>The configuration root.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerFramework.ConfigureLogging(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.IO.Abstractions.IFileSystem,Microsoft.Extensions.Logging.LogLevel,System.String,System.String,System.String,System.String,System.String@)">
+            <summary>
+            Add logging providers to service collection and obtain logger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerFramework.HandleNetCoreDependencies(System.IO.Abstractions.IFileSystem,System.Reflection.Assembly,System.Collections.Generic.LinkedList{Microsoft.Dynamics.Commerce.Installers.Framework.StepDefinition},System.String,System.String)">
+            <summary>
+            Checks if the installer assembly was built with .NET Core, in that case it copies additional files required for .NET Core Console application to work.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerFramework.GetConfigurationPropertiesToPersist(Microsoft.Extensions.Configuration.IConfigurationRoot,Microsoft.Dynamics.Commerce.Installers.Framework.SetupBase)">
+            <summary>
+            Gets a set of configuration properties to persist.
+            </summary>
+            <param name="configuration">The configuration root.</param>
+            <param name="installerSetup">An instance of class implementing SetupBase.</param>
+            <returns>The result set of the configuration properties to persist.</returns>
+            <remarks>The method returns a set of properties merged from 2 sources: Those which are enumerated in SetupBase ConfigurationPropertiesToPersist and those which are annotated with SerializedConfigurationMemberAttribute in the Operation action deriving from InstallAction.</remarks>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.Messages">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.Messages.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.Messages.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.Messages.DotNetReleaseToVersionMapping">
+            <summary>
+              Looks up a localized string similar to https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.Messages.InvalidDotNetVersionTemplate">
+            <summary>
+              Looks up a localized string similar to The .NET Framework version is invalid. The product requires a minimun release key of {0}. Installed .NET Framework release key: {1}. Release key to version mapping can be seen here: https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed..
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.MultipleRetriesCallbackRunner">
+            <summary>
+            Executes callback with retries.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.MultipleRetriesCallbackRunner.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.MultipleRetriesCallbackRunner.#ctor(Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.MultipleRetriesCallbackRunner" /> class.
+            </summary>
+            <param name="logger">Logs the exception if action run fails.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.MultipleRetriesCallbackRunner.#ctor(Microsoft.Extensions.Logging.ILogger,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.MultipleRetriesCallbackRunner" /> class.
+            </summary>
+            <param name="logger">Logs the exception if action run fails.</param>
+            <param name="maxNumberOfRetries">Maximum number of retries.</param>
+            <param name="delayBetweenRetriesInSeconds">Delay between retries in seconds.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.MultipleRetriesCallbackRunner.Run(System.Action)">
+            <summary>
+            Runs action with retries.
+            </summary>
+            <param name="action">Action to run.</param>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ProcessRunner">
+            <summary>
+            Runs a process.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ProcessRunner.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ProcessRunner.Run(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Nullable{System.TimeSpan},System.String,System.Boolean)">
+            <summary>
+            Runs the process.
+            </summary>
+            <param name="logger">The logger.</param>
+            <param name="fileName">The process file name to execute.</param>
+            <param name="arguments">The process'es arguments.</param>
+            <param name="timeout">Timeout to wait until the process is killed if not finished.</param>
+            <param name="workingDirectory">The working directory.</param>
+            <param name="dontThrowOnError">Indicates whether to throw if Process completed with ExitCode other than 0 (success). Default is False.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ProcessRunner.WaitForProcessOrKill(Microsoft.Extensions.Logging.ILogger,System.Diagnostics.Process,System.String,System.Diagnostics.Stopwatch,System.Nullable{System.TimeSpan},System.Boolean)">
+            <summary>
+            Waits for process to exit within the specified timeout or kills the process with extensive logging.
+            </summary>
+            <param name="logger">The logger to use.</param>
+            <param name="process">The process.</param>
+            <param name="processPath">The path of a process executable file that will be logged, or any descriptive string identifying the process. If not supplied, the $"with PID={process.Id}" description will be logged.</param>
+            <param name="watch">The stopwatch started prior the stopping the process to count a time elapsed for exiting.</param>
+            <param name="timeout">The timeout to use.</param>
+            <param name="throwWhenKilled">If set to <code>true</code> forces throwing the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerException"/> after killing the process.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ProcessRunner.WaitForExit(Microsoft.Extensions.Logging.ILogger,System.Diagnostics.Process,System.String,System.TimeSpan)">
+            <summary>
+            Wait for process to exit.
+            </summary>
+            <param name="logger">The logger to use.</param>
+            <param name="process">The process.</param>
+            <param name="processPath">The path of a process executable file that will be logged, or any descriptive string identifying the process.</param>
+            <param name="timeout">The timeout to use.</param>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.SerializedConfigurationMemberAttribute">
+            <summary>
+            Includes the property to be a part of the serializable Configuration.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ServiceDescriptor">
+            <summary>
+            The descriptor of the service configurable via Installer Framework.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ServiceDescriptor.#ctor(System.Type,System.Type)">
+            <summary>
+            Initializes the new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.ServiceDescriptor"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ServiceDescriptor.FromTypes``2">
+            <summary>
+            Gets the new instance of <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.ServiceDescriptor"/> for specified types.
+            </summary>
+            <typeparam name="TService">The type of a service.</typeparam>
+            <typeparam name="TImplementation">The type of an implementation.</typeparam>
+            <returns>The new instance of <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.ServiceDescriptor"/>.</returns>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.ServiceDescriptor.ServiceType">
+            <summary>
+            The type of service.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.ServiceDescriptor.ImplementationType">
+            <summary>
+            The service provider instance type.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.HttpClientService">
+            <summary>
+            An implementation of IHttpClientService.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.HttpClientService.#ctor(System.Net.Http.HttpMessageHandler)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.PowerShellService"/> class.
+            </summary>
+            <param name="handler">The instance of <see cref="T:System.Net.Http.HttpMessageHandler"/> to pass to the <see cref="T:System.Net.Http.HttpClient"/> constructor.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.HttpClientService.GetHttpClient">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.HttpClientService.GetHttpClientWithProxy(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.IHttpClientService">
+            <summary>
+            Interface to retrieve an instance of the <see cref="T:System.Net.Http.HttpClient"/> class..
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IHttpClientService.GetHttpClient">
+            <summary>
+            Gets an instance of the <see cref="T:System.Net.Http.HttpClient"/> class.
+            </summary>
+            <returns>An instance of the <see cref="T:System.Net.Http.HttpClient"/> class.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IHttpClientService.GetHttpClientWithProxy(System.String)">
+            <summary>
+            Gets an instance of the <see cref="T:System.Net.Http.HttpClient"/> class with proxy.
+            </summary>
+            <param name="proxyAddress">Proxy endpoint uri.</param>
+            <returns>An instance of the <see cref="T:System.Net.Http.HttpClient"/> class with proxy.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.IPowerShellService">
+            <summary>
+            Interface that defines how to run powershell operations.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IPowerShellService.Run(System.String,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}},System.Nullable{System.TimeSpan},System.String)">
+            <summary>
+            Executes a powershell command or script.
+            </summary>
+            <param name="scriptPathOrCommand">The path to .ps1 or .psm1 script file or powershell script string.</param>
+            <param name="parameters">An optinal parameter collection.</param>
+            <param name="timeout">An optinal time out for execution. If not provided, the default time out is used.</param>
+            <param name="workingDirectory">An optinal working directory. If not provided the current working directory is used.</param>
+            <returns>A task indicating completion.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.PowerShellService">
+            <summary>
+            An implementation of IPowersehllService.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.PowerShellService.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.PowerShellService.#ctor(Microsoft.Extensions.Logging.ILogger{Microsoft.Dynamics.Commerce.Installers.Framework.PowerShellService})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.PowerShellService"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.PowerShellService.Run(System.String,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}},System.Nullable{System.TimeSpan},System.String)">
+            <summary>
+            Executes a powershell command or script.
+            </summary>
+            <param name="scriptPathOrCommand">The path to .ps1 or .psm1 script file or powershell script string.</param>
+            <param name="parameters">An optinal parameter collection.</param>
+            <param name="timeout">An optinal time out for execution. If not provided, the default time out is used.</param>
+            <param name="workingDirectory">An optinal working directory. If not provided the current working directory is used.</param>
+            <returns>A task indicating completion.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.PowerShellService.BuildPowershellCommand(System.String,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
+            <summary>
+            Builds a powershell command string. INTERNAL VISIBILITY FOR UNIT TESTS ONLY, do not use it externally from this class.
+            </summary>
+            <param name="scriptPathOrCommand">The path to .ps1 or .psm1 script file or powershell script string.</param>
+            <param name="parameters">The parameters to use while executing.</param>
+            <returns>The built command.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.PowerShellService.GetPowershellName">
+            <summary>
+            Resolves the standard powershell process name based on the running platform.
+            </summary>
+            <returns>The powershell application name.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.FileSystemRegistryService">
+            <summary>
+            Utility class for Registry Key Management.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.FileSystemRegistryService.GetDefaultRootRegistryPath(System.IO.Abstractions.IFileSystem)">
+            <summary>
+            The recommended default registry root path.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.FileSystemRegistryService.#ctor(System.IO.Abstractions.IFileSystem,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.FileSystemRegistryService"/> class.
+            </summary>
+            <param name="fileSystem">The file system service to use.</param>
+            <param name="key">The key to use as a root of the storage.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.FileSystemRegistryService.GetRegistryKeyValues(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.FileSystemRegistryService.CreateSubKey(System.String,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.FileSystemRegistryService.DeleteSubKeyTree(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.FileSystemRegistryService.SetValue``1(System.String,``0)">
+            <summary>
+            Sets the value of RegistryKey.
+            </summary>
+            <param name="name">Registry key name</param>
+            <param name="value">Registry key value</param>
+            <typeparam name="T">Type</typeparam>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.FileSystemRegistryService.GetValue``1(System.String)">
+            <summary>
+            Gets the value of RegistryKey.
+            </summary>
+            <param name="name">Registry key name</param>
+            <typeparam name="T">Type</typeparam>
+            <returns>The object</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.FileSystemRegistryService.DeleteSubKey(System.String)">
+            <summary>
+            Deletes the registry subkey.
+            </summary>
+            <param name="subKey">Registry sub key</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.FileSystemRegistryService.OpenSubKey(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.FileSystemRegistryService.Dispose">
+            <summary>
+            Dispose method
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.FileSystemRegistryService.Exists">
+            <summary>
+            Check if the registryKey is null.
+            </summary>
+            <returns>Boolean indicating whether the registry key is null. If true, the registry key is null.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.FileSystemRegistryService.CreateIfNotExists">
+            <summary>
+            Makes sure the directory, corresponding to the key used while instantiating the class, exists.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.FileSystemRegistryService.Save(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Persists the data.
+            </summary>
+            <param name="data">The data to persist.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.FileSystemRegistryService.Load">
+            <summary>
+            Loads the data.
+            </summary>
+            <returns>The loaded data.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.FileSystemRegistryService.ReadSubkeys">
+            <summary>
+            Reads the subkeys (directories below the path that the service was initialized with).
+            </summary>
+            <returns>The subkeys retrieved.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.FileSystemRegistryService.GetValueFilePath">
+            <summary>
+            Gets the full path corresponding to the file used to store the data.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.FileSystemRegistryService.ThrowOnInvalidKey(System.String)">
+            <summary>
+            Checks whether the supplied key is valid or not and throws an exception if it is not.
+            </summary>
+            <param name="key">The key to check.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.FileSystemRegistryService.GetRegistrySubKeys(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.IRegistryKeyAccessor">
+            <summary>
+            Interface of RegistryKeyAccessor
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IRegistryKeyAccessor.SetValue``1(System.String,``0)">
+            <summary>
+            Sets the value of RegistryKey.
+            </summary>
+            <param name="name">Registry key name</param>
+            <param name="value">Registry key value</param>
+            <typeparam name="T">Type</typeparam>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IRegistryKeyAccessor.GetValue``1(System.String)">
+            <summary>
+            Gets the value of RegistryKey.
+            </summary>
+            <param name="name">Registry key name</param>
+            <typeparam name="T">Type</typeparam>
+            <returns>The object</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IRegistryKeyAccessor.DeleteSubKey(System.String)">
+            <summary>
+            Deletes the registry subkey.
+            </summary>
+            <param name="subKey">Registry sub key</param>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.IRegistryKeyService">
+            <summary>
+            Interface for Registry Key Management.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IRegistryKeyService.GetRegistryKeyValues(System.String)">
+            <summary>
+             Gets the registry key values.
+            </summary>
+            <param name="registryKeyPath">The registry key path</param>
+            <returns>The registry key values.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IRegistryKeyService.CreateSubKey(System.String,System.Boolean)">
+            <summary>
+            Creates a new subkey or opens an existing subkey with the specified access.
+            </summary>
+            <param name="registryKeyPath">Registry key path</param>
+            <param name="writable">Set to true if you need write access to the key.</param>
+            <returns>The registry key accessor</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IRegistryKeyService.DeleteSubKeyTree(System.String)">
+            <summary>
+            Deletes a subkey and any child subkeys recursively.
+            </summary>
+            <param name="registryKeyPath">Registry key path</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IRegistryKeyService.GetRegistrySubKeys(System.String)">
+            <summary>
+             Gets the registry subkey names.
+            </summary>
+            <param name="registryKeyPath">The registry key path.</param>
+            <returns>The registry subkey names.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.RegistryKeyAccessor">
+            <summary>
+            Accessor for RegistryKey.
+            This allows for mocking the behavior of RegistryKey.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.RegistryKeyAccessor.#ctor(Microsoft.Win32.RegistryKey)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.RegistryKeyAccessor"/> class.
+            </summary>
+            <param name="registryKey">Registry key</param>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.RegistryKeyAccessor.RegistryKey">
+            <summary>
+            Gets the RegistryKey.
+            </summary>
+            <returns>An instance of <see cref="T:Microsoft.Win32.RegistryKey"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.RegistryKeyAccessor.SetValue``1(System.String,``0)">
+            <summary>
+            Sets the value of RegistryKey.
+            </summary>
+            <param name="name">Registry key name</param>
+            <param name="value">Registry key value</param>
+            <typeparam name="T">Type</typeparam>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.RegistryKeyAccessor.GetValue``1(System.String)">
+            <summary>
+            Gets the value of RegistryKey.
+            </summary>
+            <param name="name">Registry key name</param>
+            <typeparam name="T">Type</typeparam>
+            <returns>The object</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.RegistryKeyAccessor.DeleteSubKey(System.String)">
+            <summary>
+            Deletes the registry subkey.
+            </summary>
+            <param name="subKey">Registry sub key</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.RegistryKeyAccessor.Dispose">
+            <summary>
+            Dispose method
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.RegistryKeyService">
+            <summary>
+            Utility class for Registry Key Management.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.RegistryKeyService.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.RegistryKeyService"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.RegistryKeyService.GetRegistryKeyValues(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.RegistryKeyService.CreateSubKey(System.String,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.RegistryKeyService.DeleteSubKeyTree(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.RegistryKeyService.GetRegistrySubKeys(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ISqlServerService">
+            <summary>
+            Provides the methods for accessing the SQL Server.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ISqlServerService.LocateServerInstance(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext,System.String,System.String,System.String,System.String)">
+            <summary>
+            Locates a validated SQL Server instance.
+            </summary>
+            <param name="context">Installer Step's context.</param>
+            <param name="sqlServerNameConfigKey">The name of the configuration parameter pointing to an optional SQL Server Name.</param>
+            <param name="skipFullTextCheckConfigKey">The name of the configuration parameter pointing to an optional parameter indicating wither to skip Full Text Search requirement or not.</param>
+            <param name="trustSqlServerCertificateConfigKey">The name of the configuration parameter providing a value for the SQL Server connection string argument TrustServerCertificate.</param>
+            <param name="disableSqlConnectionEncryptionConfigKey">The name of the configuration parameter indicating if the SQL Server connection should not be encrypted.</param>
+            <returns>Resolved SQL Server Name.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ISqlServerService.GetConnectionString(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext,System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets SQL Server connection string based on the provided server name.
+            </summary>
+            <param name="context">Installer Step's context.</param>
+            <param name="serverName">The server name.</param>
+            <param name="databaseName">The name of the database.</param>
+            <param name="trustSqlServerCertificateConfigKey">The name of the configuration parameter providing a value for the SQL Server connection string argument TrustServerCertificate.</param>
+            <param name="disableSqlConnectionEncryptionConfigKey">The name of the configuration parameter indicating if the SQL Server connection should not be encrypted.</param>
+            <returns>The connection string.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IUserGroupService.CreateGroup(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext,Microsoft.Dynamics.Commerce.Installers.Framework.WindowsGroup)">
+            <summary>
+            Creates the windows group.
+            </summary>
+            <param name="context">Installer step context.</param>
+            <param name="windowsGroup">The winodws group to create.</param>
+            <returns>True is the group was created, False if the group already existed.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IUserGroupService.AddUserToGroup(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext,System.String,System.String)">
+            <summary>
+            Adda an existing user to the group.
+            </summary>
+            <param name="context">Installer step context.</param>
+            <param name="groupName">The group name.</param>
+            <param name="userName">The existing user name.</param>
+            <returns>True is the user was added, False if the user was already a member of the group.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IUserGroupService.DoesGroupExist(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext,System.String)">
+            <summary>
+            Checks whether the local group exists.
+            </summary>
+            <param name="context">Installer step context.</param>
+            <param name="groupName">The group name.</param>
+            <returns>True is the group exists, False otherwise.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.UserGroupService.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.UserGroupService.CreateGroup(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext,Microsoft.Dynamics.Commerce.Installers.Framework.WindowsGroup)">
+            <summary>
+            Creates the windows group.
+            </summary>
+            <param name="context">Installer step context.</param>
+            <param name="windowsGroup">The winodws group to create.</param>
+            <returns>True is the group was created, False if the group already existed.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.UserGroupService.AddUserToGroup(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext,System.String,System.String)">
+            <summary>
+            Adda an existing user to the group.
+            </summary>
+            <param name="context">Installer step context.</param>
+            <param name="groupName">The group name.</param>
+            <param name="userName">The existing user name.</param>
+            <returns>True is the user was added, False if the user was already a member of the group.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.UserGroupService.DoesGroupExist(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext,System.String)">
+            <summary>
+            Checks whether the local group exists.
+            </summary>
+            <param name="context">Installer step context.</param>
+            <param name="groupName">The group name.</param>
+            <returns>True is the group exists, False otherwise.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolService">
+            <summary>
+            An implementation of IApplicationPoolService.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolService.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolService.#ctor(Microsoft.Extensions.Logging.ILogger{Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolService})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolService"/> class.
+            </summary>
+            <param name="logger">The logger instance to use.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolService.Start(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolService.Stop(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolService.Restart(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolService.Recycle(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolService.Exists(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.IApplicationPoolService">
+            <summary>
+            Interface to perform the basic operations on the IIS application pools.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IApplicationPoolService.Start(System.String)">
+            <summary>
+            Start the application pool.
+            </summary>
+            <param name="applicationPoolName">The IIS application pool name.</param>
+            <returns>The resulting state of the application pool.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IApplicationPoolService.Stop(System.String)">
+            <summary>
+            Stop the application pool.
+            </summary>
+            <param name="applicationPoolName">The IIS application pool name.</param>
+            <returns>The resulting state of the application pool.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IApplicationPoolService.Restart(System.String)">
+            <summary>
+            Restart (stop and start) the application pool.
+            If the application pool is not started, the Stop action will not be invoked.
+            The expected final state of the application pool is 'Started'.
+            </summary>
+            <param name="applicationPoolName">The IIS application pool name.</param>
+            <returns>The resulting state of the application pool.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IApplicationPoolService.Recycle(System.String)">
+            <summary>
+            Recycle the application pool.
+            Stopped application pool will not be recycled - please check the result
+            to determine if the application pool has the proper state after Recycle was invoked.
+            </summary>
+            <param name="applicationPoolName">The IIS application pool name.</param>
+            <returns>The resulting state of the application pool.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IApplicationPoolService.Exists(System.String)">
+            <summary>
+            Determines whether the specified application pool exists.
+            </summary>
+            <param name="applicationPoolName">The IIS application pool name.</param>
+            <returns><code>true</code> if the application pool exists.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.IXmlUpdaterService">
+             <summary>
+             Service to update xml configuration files.
+             It can be used as following:
+            
+                 XmlDocument doc = xmlUpdaterService.GetConfigFileDocument(filePath);
+                 xmlUpdaterService.UpsertSqlConnectionString(doc, "ConnectionStringKey", "ConnectionStringValue");
+                 .....
+                 xmlUpdaterService.SaveConfiguration(doc, filePath);
+             </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IXmlUpdaterService.GetConfigFileDocument(System.String)">
+            <summary>
+            Gets Xml Document for a specified xml-based config file.
+            </summary>
+            <param name="filePath">Path to xml-based config file.</param>
+            <returns>Instance of <see cref="T:System.Xml.XmlDocument"/> representing xml configuration.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IXmlUpdaterService.UpdateXmlConfig(System.Xml.XmlDocument,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Updates specified values in <see cref="T:System.Xml.XmlDocument"/>.
+            </summary>
+            <param name="configDocument">Instance of <see cref="T:System.Xml.XmlDocument"/> that represents xml configuration that needs to be updated.</param>
+            <param name="configAttributesToUpdate">Key-value pairs of config entries' xPathes and respective values that should be updated in target config file.
+            If referred xml element does not exist operation will fail.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IXmlUpdaterService.UpsertSqlConnectionString(System.Xml.XmlDocument,System.String,System.String)">
+            <summary>
+            Updates or inserts a connection string to a <see cref="T:System.Xml.XmlDocument"/>.
+            </summary>
+            <param name="configDocument">Instance of <see cref="T:System.Xml.XmlDocument"/> representing xml configuration file.</param>
+            <param name="connectionStringName">Channel DB connection string name.</param>
+            <param name="dbConnectionString">Database connection string.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IXmlUpdaterService.SaveConfiguration(System.Xml.XmlDocument,System.String)">
+            <summary>
+            Saves <see cref="T:System.Xml.XmlDocument"/> into file.
+            </summary>
+            <param name="configDocument">Instance of <see cref="T:System.Xml.XmlDocument"/> representing xml configuration file.</param>
+            <param name="filePath">Path to the file.</param>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.XmlUpdaterService">
+             <summary>
+             Service to update xml configuration files.
+             It can be used as following:
+            
+                 XmlDocument doc = xmlUpdaterService.GetConfigFileDocument(filePath);
+                 xmlUpdaterService.UpsertSqlConnectionString(doc, "ConnectionStringKey", "ConnectionStringValue");
+                 xmlUpdaterService.UpsertAppSettings(doc, "AppSettingsKey", "AppSettingsValue");
+                 .....
+                 xmlUpdaterService.SaveConfiguration(doc, filePath);
+             </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.XmlUpdaterService.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.XmlUpdaterService.#ctor(System.IO.Abstractions.IFileSystem,Microsoft.Extensions.Logging.ILogger{Microsoft.Dynamics.Commerce.Installers.Framework.XmlUpdaterService})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.XmlUpdaterService"/> class.
+            </summary>
+            <param name="fileSystem">The file system to use.</param>
+            <param name="logger">Logger.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.XmlUpdaterService.GetConfigFileDocument(System.String)">
+            <summary>
+            Gets Xml Document for a specified xml-based config file.
+            </summary>
+            <param name="filePath">Path to xml-based config file.</param>
+            <returns>Instance of <see cref="T:System.Xml.XmlDocument"/> representing xml configuration.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.XmlUpdaterService.UpdateXmlConfig(System.Xml.XmlDocument,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Updates specified values in <see cref="T:System.Xml.XmlDocument"/>.
+            </summary>
+            <param name="configDocument">Instance of <see cref="T:System.Xml.XmlDocument"/> that represents xml configuration that needs to be updated.</param>
+            <param name="configAttributesToUpdate">Key-value pairs of config entries' xPathes and respective values that should be updated in target config file.
+            If referred xml element does not exist operation will fail.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.XmlUpdaterService.UpsertSqlConnectionString(System.Xml.XmlDocument,System.String,System.String)">
+            <summary>
+            Updates or inserts a connection string to a <see cref="T:System.Xml.XmlDocument"/>.
+            </summary>
+            <param name="configDocument">Instance of <see cref="T:System.Xml.XmlDocument"/> representing xml configuration file.</param>
+            <param name="connectionStringName">Channel DB connection string name.</param>
+            <param name="dbConnectionString">Database connection string.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.XmlUpdaterService.SaveConfiguration(System.Xml.XmlDocument,System.String)">
+            <summary>
+            Saves <see cref="T:System.Xml.XmlDocument"/> into file.
+            </summary>
+            <param name="configDocument">Instance of <see cref="T:System.Xml.XmlDocument"/> representing xml configuration file.</param>
+            <param name="filePath">Path to the file.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.XmlUpdaterService.UpsertConfigurationValue(System.Xml.XPath.XPathNavigator,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Updates or inserts value into xml file.
+            </summary>
+            <param name="configNavigator">A xpath navigator.</param>
+            <param name="parentElementPath">A xpath to parent element </param>
+            <param name="elementName">The element name.</param>
+            <param name="keyAttributeName">The key attribute name.</param>
+            <param name="keyName">The key name.</param>
+            <param name="valueAttributeName">The value attribute name.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.XmlUpdaterService.SetConfigurationValue(System.Xml.XPath.XPathNavigator,System.String,System.String)">
+            <summary>
+            Update xml configuration.
+            </summary>
+            <param name="navigator">The xpath navigator.</param>
+            <param name="keyXPath">The xpath to update.</param>
+            <param name="value">New value.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.XmlUpdaterService.ThrowIfNullValue(System.String,System.String)">
+            <summary>
+            Throws an <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerException"/> when attempting to write a null attribute value to configuration.
+            </summary>
+            <param name="value">A value to check for null.</param>
+            <param name="keyXPath">The xpath related to the null value.</param>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.SetupBase">
+            <summary>
+            Base setup class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.SetupBase.InstallerName">
+            <summary>
+            Gets the value for the installer name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.SetupBase.PreDeploymentSteps">
+            <summary>
+            Gets a set of steps to be executed prior installation process. These steps will be executed prior any internal steps involving file copy operations.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.SetupBase.Operations">
+            <summary>
+            Gets the value for the operations supported by this setup.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.SetupBase.ConfigurationSources">
+            <summary>
+            Gets the value for installer configuration sources.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.SetupBase.ConfigurationPropertiesToPersist">
+            <summary>
+            Gets a set of Installer Step Context Configuration properties to be persisted once Installation is completed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.SetupBase.Context">
+            <summary>
+            Gets setup context.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.SetupBase.GetExtendedServices">
+            <summary>
+            Gets the service providers that Setup will add to framework's standard implementation.
+            </summary>
+            <returns>The collection of service providers.</returns>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.SetupBase.FoldersToPreserve">
+            <summary>
+            Gets a set of paths to be kept when reinstalling the product.
+            Normally, the re-installation will delete the entire product folder and deploy if from scratch.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.SetupContext">
+            <summary>
+            Represents a Setup context.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.SetupContext.InstallationRootDirectoryPath">
+            <summary>
+            Gets or sets installation root directory path
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.SetupContext.GetConfiguration">
+            <summary>
+            Gets the Configuration.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.AnnotatedValidationStep">
+            <summary>
+            Validates the annotated parameters passed to the installer.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.AnnotatedValidationStep.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.AnnotatedValidationStep.#ctor(System.Collections.Generic.IEnumerable{Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.ValidationDescriptor})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.AnnotatedValidationStep"/> class.
+            </summary>
+            <param name="validationDescriptors">The items to validate.
+            The validation issued for the parameter by attaching an attribute descendant from <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.Attributes.BaseValidatorAttribute"/></param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.AnnotatedValidationStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.AnnotatedValidationStep.ToString">
+            <summary>
+            Provides a string representation for this instance.
+            </summary>
+            <returns>A string.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.CopyDirectoryStep">
+            <summary>
+            Copies a directory.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.CopyDirectoryStep.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.CopyDirectoryStep.#ctor(System.String,System.String,System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.CopyDirectoryStep" /> class.
+            </summary>
+            <param name="source">The source directory path.</param>
+            <param name="destination">The destination directory path.</param>
+            <param name="description">The reason why this copy is being performed.</param>
+            <param name="recursive">Whether to copy recursively.</param>
+            <param name="overwriteExisting">Whether to overwrite existing.</param>
+            <param name="ignoreWhenSourceNotExists">Do not fail if the source directly does not exist.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.CopyDirectoryStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Run the installer step.
+            </summary>
+            <param name="context">The installer step context.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.CopyDirectoryStep.DirectoryCopy(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext,System.String,System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Copies files from one directory to another.
+            </summary>
+            <param name="context">The context to use.</param>
+            <param name="sourceDirName">The name of the source directory.</param>
+            <param name="destDirName">The name of the target directory.</param>
+            <param name="copySubDirs">Indicates whether to copy subdirectories or not.</param>
+            <param name="overwriteExisting">Indicates whether to overwrite existing directories/files or not.</param>
+            <param name="ignoreWhenSourceNotExists">If False and the source directory doesn't exist - will throw an exception. If True and the source directory doesn't exist - will return 0 without making any copy operation.</param>
+            <returns>Number of copied files.</returns>
+            <remarks>https://docs.microsoft.com/en-us/dotnet/standard/io/how-to-copy-directories</remarks>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.CopyDirectoryStep.ToString">
+            <summary>
+            Provides a string representation for this instance.
+            </summary>
+            <returns>A string.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.CopyFileStep">
+            <summary>
+            Copies a file.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.CopyFileStep.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.CopyFileStep.#ctor(System.String,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.CopyFileStep" /> class.
+            </summary>
+            <param name="source">The source file path.</param>
+            <param name="destination">The destination file path.</param>\
+            <param name="description">The reason why this copy is being performed.</param>
+            <param name="overwriteExisting">Whether to overwrite existing.</param>
+            <param name="ignoreWhenSourceNotExists">Do not fail if the source directly does not exist.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.CopyFileStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Run the installer step.
+            </summary>
+            <param name="context">The installer step context.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.CopyFileStep.ToString">
+            <summary>
+            Provides a string representation for this instance.
+            </summary>
+            <returns>A string.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.DeleteDirectoryStep">
+            <summary>
+            Deletes a directory.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.DeleteDirectoryStep.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.DeleteDirectoryStep.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.DeleteDirectoryStep" /> class.
+            </summary>
+            <param name="path">The directory path.</param>
+            <param name="description">The reason why this deletion is being performed.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.DeleteDirectoryStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Run the installer step.
+            </summary>
+            <param name="context">The installer step context.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.DeleteDirectoryStep.ToString">
+            <summary>
+            Provides a string representation for this instance.
+            </summary>
+            <returns>A string.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.DeleteRegistryKeyStep">
+            <summary>
+            Removes a registry key.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.DeleteRegistryKeyStep.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.DeleteRegistryKeyStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Run the installer step.
+            </summary>
+            <param name="context">The installer step context.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.DeleteRegistryKeyStep.ToString">
+            <summary>
+            Provides a string representation for this instance.
+            </summary>
+            <returns>A string.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.EtwDefinition">
+            <summary>
+            A container with ETW properties to process.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.EtwDefinition.#ctor(System.String,System.String)">
+            <summary>
+            Creates an instance of the class.
+            </summary>
+            <param name="manifestFileRelativePath">Relative path to the manifest file.</param>
+            <param name="resourceFileRelativePath">Relative path to the resource file.</param>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.EtwDefinition.ManifestFileRelativePath">
+            <summary>
+            Gets the relative path to the manifest file.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.EtwDefinition.ResourceFileRelativePath">
+            <summary>
+            Gets The relative path to the 
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.EtwStep">
+            <summary>
+            Registers/unregisters ETW log.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.EtwStep.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.EtwStep.#ctor(System.Boolean,System.String,System.String)">
+            <summary>
+            Creates a new instance of the class.
+            </summary>
+            <param name="isRegistration">True if ETW should be registered, False to unregister.</param>
+            <param name="manifestFileRelativePath">Relative path to the manifest file.</param>
+            <param name="resourceFileRelativePath">Relative path to the resource file.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.EtwStep.#ctor(System.Boolean,Microsoft.Dynamics.Commerce.Installers.Framework.EtwDefinition[])">
+            <summary>
+            Creates a new instance of the class.
+            </summary>
+            <param name="isRegistration">True if the ETW(s) should be registered, False to unregister.</param>
+            <param name="etwsDefinitions">ETWs definitions.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.EtwStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Run the installer step.
+            </summary>
+            <param name="context">The installer step context.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.EtwStep.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.EventLogSetupDefinition">
+            <summary>
+            A container with Event Log setup properties to process.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.EventLogSetupDefinition.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Creates an instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.EventLogSetupDefinition"/> class.
+            </summary>
+            <param name="configurationFilePath">Path to the configuration file.</param>
+            <param name="sourceName">The event source name.</param>
+            <param name="logName">Log name.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.EventLogSetupDefinition.FromConfig(System.String,System.String)">
+            <summary>
+            Gets the new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.EventLogSetupDefinition"/> initialized with the configuration path.
+            </summary>
+            <param name="configurationFilePath">Path to the configuration file.</param>
+            <param name="logName">Log name.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.EventLogSetupDefinition.FromSourceName(System.String,System.String)">
+            <summary>
+            Gets the new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.EventLogSetupDefinition"/> initialized with the configuration path.
+            </summary>
+            <param name="sourceName">Path to the configuration file.</param>
+            <param name="logName">Log name.</param>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.EventLogSetupDefinition.ConfigurationFilePath">
+            <summary>
+            Gets the path to the configuration file to read the log settings from.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.EventLogSetupDefinition.SourceName">
+            <summary>
+            Gets the event source name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.EventLogSetupDefinition.LogName">
+            <summary>
+            Gets event log name.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.EventLogSetupStep">
+            <summary>
+            Registers/unregisters Event Log.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.EventLogSetupStep.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.EventLogSetupStep.#ctor(System.Boolean,Microsoft.Dynamics.Commerce.Installers.Framework.EventLogSetupDefinition[])">
+            <summary>
+            Creates a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.EventLogSetupStep"/> class.
+            </summary>
+            <param name="isRegistration">True if Event Log should be registered, False to unregister.</param>
+            <param name="setupDefinitions">The definitions to register.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.EventLogSetupStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Run the installer step.
+            </summary>
+            <param name="context">The installer step context.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.EventLogSetupStep.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ExtractEmbeddedZipStep">
+            <summary>
+            Class to extract embedded zip resource to directory.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ExtractEmbeddedZipStep.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ExtractEmbeddedZipStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Run the content extraction step.
+            </summary>
+            <param name="context">The installer step context.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ExtractEmbeddedZipStep.ToString">
+            <summary>
+            Provides a string representation for this instance.
+            </summary>
+            <returns>A string.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.KillProcess">
+            <summary>
+            Kills OS process.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.KillProcess.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.KillProcess.#ctor(System.String)">
+            <summary>
+            Creates new instance of the class.
+            </summary>
+            <param name="processName">The process name to kill.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.KillProcess.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Run the deployment step.
+            </summary>
+            <param name="context">The installer step context.</param>
+            <returns>The task resulting from the step execution.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.KillProcess.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.OpenFirewallPortStep">
+            <summary>
+            Configures a Windows Firewall rule to open a TCP port for inbound traffic.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.OpenFirewallPortStep.#ctor(System.String,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.OpenFirewallPortStep" /> class.
+            </summary>
+            <param name="firewallRuleName">Name of firewall rule that will be created.</param>
+            <param name="portNumber">Number of port that should be opened.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.OpenFirewallPortStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.OpenFirewallPortStep.ToString">
+            <summary>
+            Provides a string representation for this instance.
+            </summary>
+            <returns>A string.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.OpenFirewallPortStep.IsRuleDefined(System.String,Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Checks if the firewall rule is already defined.
+            </summary>
+            <param name="ruleName">Name of the firewall rule.</param>
+            <param name="context">The installer step context.</param>
+            <returns>True if the rule with specified name exists, False otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.OpenFirewallPortStep.CreateNewFirewallRule(System.String,System.Int32,Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Runs 'netsh' CLI command to create firewall rule.
+            </summary>
+            <param name="ruleName">Rule name.</param>
+            <param name="portNumber">Port number.</param>
+            <param name="context">The installer step context.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.RunPowerShellStep">
+            <summary>
+            Runs a powershell script.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.RunPowerShellStep.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}},System.String,System.Nullable{System.TimeSpan})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.RunPowerShellStep" /> class.
+            </summary>
+            <param name="scriptPathOrCommand">The path to .ps1 or .psm1 script file or powershell script string.</param>
+            <param name="description">The reason why this powershell command is being run.</param>
+            <param name="parameters">An optional list of parameters to be passed.</param>
+            <param name="workingDirectory">Change the working directory before running the script or command.</param>
+            <param name="timeout">The default time out for the execution.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.RunPowerShellStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Run the installer step.
+            </summary>
+            <param name="context">The installer step context.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.RunPowerShellStep.ToString">
+            <summary>
+            Provides a string representation for this instance.
+            </summary>
+            <returns>A string.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.SaveRegistryKeyStep`1">
+            <summary>
+            Saves a registry key.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.SaveRegistryKeyStep`1.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.SaveRegistryKeyStep`1.#ctor(System.String,`0,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.SaveRegistryKeyStep`1"/> class.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="entry">The entry.</param>
+            <param name="description">The description.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.SaveRegistryKeyStep`1.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Run the installer step.
+            </summary>
+            <param name="context">The installer step context.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.SaveRegistryKeyStep`1.ToString">
+            <summary>
+            Provides a string representation for this instance.
+            </summary>
+            <returns>A string.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateCertificateLocationStep">
+            <summary>
+            Validates the annotated parameters passed to the installer.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateCertificateLocationStep.ExpectedCertLocationPrefix">
+            <summary>
+            The prefix from a correct certificate location starts with.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateCertificateLocationStep.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateCertificateLocationStep"/> class.
+            </summary>
+            <param name="certificateLocation">The location to validate.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateCertificateLocationStep.IsValid">
+            <summary>
+            Validates that the certificate location starts with proper character sequence.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateCertificateLocationStep.GetExpectedCertLocationPrefix">
+            <summary>
+            Gets the location prefix used to validate the certificates.
+            </summary>
+            <returns>The location prefix.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateCertificateLocationStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateCertificateLocationStep.ToString">
+            <summary>
+            Provides a string representation for this instance.
+            </summary>
+            <returns>A string.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateDotNetVersionStep">
+            <summary>
+            Validates that the specified or higher version of .NET (formerly .NET Core) or legacy .NET Framework is installed.
+            </summary>
+            <remarks>
+            For .NET Core the implementation is based on the specification and the official documentation:
+            https://github.com/dotnet/designs/blob/main/accepted/2020/install-locations.md
+            https://learn.microsoft.com/en-us/dotnet/core/install/how-to-detect-installed-versions?pivots=os-windows#check-for-install-folders
+            
+            For .NET Framework see:
+            https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed
+            </remarks>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateDotNetVersionStep.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateDotNetVersionStep.NetCoreRuntime">
+            <summary>
+            .NET Core runtime name.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateDotNetVersionStep.AspNetCoreRuntime">
+            <summary>
+            ASP.NET Core runtime name.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateDotNetVersionStep.WindowsDesktopRuntime">
+            <summary>
+            .NET Windows Desktop runtime name.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateDotNetVersionStep.DotNet452ReleaseKey">
+            <summary>
+            Release key corresponding to .NET 4.5.2.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateDotNetVersionStep.DotNet461ReleaseKey">
+            <summary>
+            Release key corresponding to .NET 4.6.1.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateDotNetVersionStep.DotNet471ReleaseKey">
+            <summary>
+            Release key corresponding to .NET 4.7.1.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateDotNetVersionStep.DotNet472ReleaseKey">
+            <summary>
+            Release key corresponding to .NET 4.7.2.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateDotNetVersionStep.#ctor(System.String,System.Version)">
+            <summary>
+            Creates a new instance of the class.
+            </summary>
+            <param name="runtimeName">.NET runtime name.</param>
+            <param name="minimumVersion">Required minimum version of .NET runtime.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateDotNetVersionStep.#ctor(System.Int32)">
+            <summary>
+            Creates a new instance of the class.
+            </summary>
+            <param name="minimumDotNetReleaseKey">The Release registry key value corresponding to the minimal required .NET Framework Version. Release key to version mapping: 'https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed'.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateDotNetVersionStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Run the deployment step.
+            </summary>
+            <param name="context">The installer step context.</param>
+            <returns>The task resulting from the step execution.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateDotNetVersionStep.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateDotNetVersionStep.GetGlobalDotNetInstallLocation(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Gets global .NET install location which is either the default or a custom location. The default location is %ProgramFiles%\dotnet.
+            See specification: https://github.com/dotnet/designs/blob/main/accepted/2020/install-locations.md#installation-types
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateExtensionsAreNotInstalledStep">
+            <summary>
+            Validates the that the extensions of base product (Microsoft component) are not installed.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateExtensionsAreNotInstalledStep.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateExtensionsAreNotInstalledStep.#ctor(System.String,System.String,System.String,Microsoft.Dynamics.Commerce.Installers.Framework.ExitCode)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateExtensionsAreNotInstalledStep"/> class.
+            </summary>
+            <param name="installerName">The name of the installer to validate.</param>
+            <param name="installationRegistryRoot">The path to the registry key containing the information about the installed products and extensions.</param>
+            <param name="errorMessage">The error message to display if the previous installation is not found.</param>
+            <param name="exitCodeInCaseOfError">The error code to return from executable if the previous installation is not found.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateExtensionsAreNotInstalledStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateExtensionsAreNotInstalledStep.ToString">
+            <summary>
+            Provides a string representation for this instance.
+            </summary>
+            <returns>A string.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateLegacyProductIsNotInstalledStep">
+            <summary>
+            Validates the that the legacy product (Microsoft component) is not installed.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateLegacyProductIsNotInstalledStep.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateLegacyProductIsNotInstalledStep.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateExtensionsAreNotInstalledStep"/> class.
+            </summary>
+            <param name="productKeyName">The legacy product registry key name to search for.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateLegacyProductIsNotInstalledStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateLegacyProductIsNotInstalledStep.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateProductIsInstalledStep">
+            <summary>
+            Validates the that base product (Microsoft component) is installed.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateProductIsInstalledStep.#ctor(System.String,System.String,System.String,Microsoft.Dynamics.Commerce.Installers.Framework.ExitCode)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateProductIsInstalledStep"/> class.
+            </summary>
+            <param name="description">The description of the installer or extension to validate.</param>
+            <param name="installationRecordConfigurationKey">The name of the configuration key of the installation record.</param>
+            <param name="errorMessage">The error message to display if the previous installation is not found.</param>
+            <param name="exitCodeInCaseOfError">The error code to return from executable if the previous installation is not found.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateProductIsInstalledStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateProductIsInstalledStep.ToString">
+            <summary>
+            Provides a string representation for this instance.
+            </summary>
+            <returns>A string.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateSchannelSettingsStep">
+            <summary>
+            Validates secure version of TLS is enabled and Strong Crypto is enforced
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateSchannelSettingsStep.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateSchannelSettingsStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Checks that TLS 1.2 and 1.3 is enabled, TLS 1.1 and TLS 1.0 are disabled and Strong Crypto is enforced.
+            </summary>
+            <param name="context">The installer step context.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateSchannelSettingsStep.ToString">
+            <summary>
+            Provides a string representation for this instance.
+            </summary>
+            <returns>A string.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateSchannelSettingsStep.CheckTlsSettings(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Checks that different versions of TLS security protocols are in expected states.
+            </summary>
+            <param name="context">Installer Step conext.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateSchannelSettingsStep.CheckTlsProtocolIsInExpectedStatus(System.String,System.String,System.Boolean,Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Checks that specific TLS protocol is in expected state (enabled or disabled).
+            </summary>
+            <param name="tlsVersionSpecificRegKey">Name of Registry Key corresponding to specific version of TLS protocol.</param>
+            <param name="clientServerSubKey">Registry Sub Key name corresponding to Client or Server TLS setting.</param>
+            <param name="expectEnabledStatus">Expected status: 'true' if expectation of protocol is to be enabled.</param>
+            <param name="context">Installer Step conext.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateSchannelSettingsStep.CheckStrongCryptoSettings(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Checks that SchUseStrongCrypto setting is in enabled state for various configurations.
+            </summary>
+            <param name="context">Installer Step conext.</param>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateTelemetryEndpointsAreReachableStep">
+            <summary>
+            Validates telemetry endpoints are reachable.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateTelemetryEndpointsAreReachableStep.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateTelemetryEndpointsAreReachableStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Validates telemetry endpoints are reachable and responds http status 200.
+            </summary>
+            <param name="context">The installer step context.</param>
+            <returns>A task.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateTelemetryEndpointsAreReachableStep.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ValidateTelemetryEndpointsAreReachableStep.IsTelemetryEndpointAvailable(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext,Microsoft.Extensions.Logging.ILogger,Microsoft.Dynamics.Commerce.Installers.Framework.IHttpClientService,System.Uri,System.Net.Http.HttpMethod)">
+            <summary>
+            Checks if telemetry endpoint is available and responds HttpStatus 200.
+            </summary>
+            <param name="context">The installer step context.</param>
+            <param name="logger">The logger.</param>
+            <param name="httpClientService">The http client service.</param>
+            <param name="uri">Telemetry endpoint's uri.</param>
+            <param name="httpMethod">The Http Method.</param>
+            <returns>A task.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolDefinition">
+            <summary>
+            Represents an IIS Application Pool settings.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolDefinition.#ctor(System.String,System.Boolean,System.String,System.Boolean)">
+            <summary>
+            Creates a new instance of the Application Pool definition.
+            </summary>
+            <param name="name">The name of the Application Pool.</param>
+            <param name="loadUserProfile">The flag indicating that the Application Pool must load a user profile.</param>
+            <param name="managedRuntimeVersion">The managed runtime version that the Application Pool will be set up with.
+            Null value will be replaced with the empty string. This corresponds to ASP.NET Core.
+            The examples of other possible values are "v2.0", "v3.0", and "v4.0".</param>
+            <param name="enable32BitAppOnWin64">The flag indicating whether to allow 32-bit applications to run on a computer that has a 64-bit processor.</param>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolDefinition.Name">
+            <summary>
+            Gets the name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolDefinition.Enable32BitAppOnWin64">
+            <summary>
+            Gets a value indicating whether to allow 32-bit applications to run on a computer that has a 64-bit processor.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolDefinition.LoadUserProfile">
+            <summary>
+            Gets the flag indicating that the Application Pool must load a user profile.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolDefinition.ManagedRuntimeVersion">
+            <summary>
+            The managed runtime version that the Application Pool will be set up with.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolRestartStep">
+            <summary>
+            The step to restart the IIS Application Pool.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolRestartStep.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolRestartStep.#ctor(System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolRestartStep" /> class.
+            </summary>
+            <param name="applicationPoolName">The application's pool name to restart.</param>
+            <param name="throwIfAppPoolMissing">If set to true, the exception will be thrown if the specified application pool is not found.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolRestartStep.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolRestartStep" /> class.
+            This instance will not throw if the application pool is not found.
+            </summary>
+            <param name="applicationPoolName">The application's pool name to restart.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolRestartStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Runs the installer step.
+            </summary>
+            <param name="context">The installer step context.</param>
+            <returns>The task resulting from the step execution.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.CreateWebSiteStep">
+            <summary>
+            Creates a Web Site in IIS.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.CreateWebSiteStep.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.CreateWebSiteStep.DefaultSiteFolder">
+            <summary>
+            Used in case Web Site should not have default created applications but instead 1 or more explicitly creates ones.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.CreateWebSiteStep.#ctor(System.String,System.String,System.Int32,System.Uri,System.String)">
+            <summary>
+            Instantiates the deployment step to be used while creating a Web Site with a default Application.
+            </summary>
+            <param name="siteName">Web Site name.</param>
+            <param name="relativePhysicalPath">Relative Physical Path of the site's default Application.</param>
+            <param name="port">The port.</param>
+            <param name="certificateLocation">SSL Certificate location corresponding to the certificate installed in LocalMachine/My.</param>
+            <param name="applicationPoolName">The name of the application pool to be used by the Web Site and its default Application.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.CreateWebSiteStep.#ctor(System.String,System.String,System.Int32,System.Uri,System.String,System.Boolean)">
+            <summary>
+            Instantiates the deployment step to be used while creating a Web Site with a default Application.
+            </summary>
+            <param name="siteName">Web Site name.</param>
+            <param name="relativePhysicalPath">Relative Physical Path of the site's default Application.</param>
+            <param name="port">The port.</param>
+            <param name="certificateLocation">SSL Certificate location corresponding to the certificate installed in LocalMachine/My.</param>
+            <param name="applicationPoolName">The name of the application pool to be used by the Web Site and its default Application.</param>
+            <param name="applicationPoolLoadUserProfile">The value used to set the Application Pool property LoadUserProfile.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.CreateWebSiteStep.#ctor(System.String,System.Int32,System.Uri,System.String,Microsoft.Dynamics.Commerce.Installers.Framework.WebSiteApplication[])">
+            <summary>
+            Instantiates the deployment step to be used while creating a Web Site with a specific set of Applications.
+            </summary>
+            <param name="siteName">Web Site name.</param>
+            <param name="port">The port.</param>
+            <param name="certificateLocation">SSL Certificate thumbprint installed in LocalMachine/My.</param>
+            <param name="applicationPoolName">The name of the application pool to be used by the Web Site and its Applications.</param>
+            <param name="applications">A set of applications to be created for the given Web Site.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.CreateWebSiteStep.#ctor(System.String,System.Int32,System.Uri,Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolDefinition,Microsoft.Dynamics.Commerce.Installers.Framework.WebSiteApplication[])">
+            <summary>
+            Instantiates the deployment step to be used while creating a Web Site with a specific set of Applications.
+            </summary>
+            <param name="siteName">Web Site name.</param>
+            <param name="port">The port.</param>
+            <param name="certificateLocation">SSL Certificate thumbprint installed in LocalMachine/My.</param>
+            <param name="applicationPoolDefinition">The definition of the application pool to be used by the Web Site and its Applications.</param>
+            <param name="applications">A set of applications to be created for the given Web Site.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.CreateWebSiteStep.#ctor(System.String,System.Int32,System.Uri,Microsoft.Dynamics.Commerce.Installers.Framework.ApplicationPoolDefinition,System.Nullable{System.TimeSpan},Microsoft.Dynamics.Commerce.Installers.Framework.WebSiteApplication[])">
+            <summary>
+            Instantiates the deployment step to be used while creating a Web Site with a specific set of Applications.
+            </summary>
+            <param name="siteName">Web Site name.</param>
+            <param name="port">The port.</param>
+            <param name="certificateLocation">SSL Certificate thumbprint installed in LocalMachine/My.</param>
+            <param name="applicationPoolDefinition">The definition of the application pool to be used by the Web Site and its Applications.</param>
+            <param name="idleTimeout">The idle timeout.</param>
+            <param name="applications">A set of applications to be created for the given Web Site.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.CreateWebSiteStep.#ctor(System.String,System.Int32,System.Uri,System.String,System.Boolean,Microsoft.Dynamics.Commerce.Installers.Framework.WebSiteApplication[])">
+            <summary>
+            Instantiates the deployment step to be used while creating a Web Site with a specific set of Applications.
+            </summary>
+            <param name="siteName">Web Site name.</param>
+            <param name="port">The port.</param>
+            <param name="certificateLocation">SSL Certificate thumbprint installed in LocalMachine/My.</param>
+            <param name="applicationPoolName">The name of the application pool to be used by the Web Site and its Applications.</param>
+            <param name="applicationPoolLoadUserProfile">The value used to set the Application Pool property LoadUserProfile.</param>
+            <param name="applications">A set of applications to be created for the given Web Site.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.CreateWebSiteStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Run the installer step.
+            </summary>
+            <param name="context">The installer step context.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.CreateWebSiteStep.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.DeleteWebSiteStep">
+            <summary>
+            Deletes a Web Site in IIS.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.DeleteWebSiteStep.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.DeleteWebSiteStep.#ctor(System.String,System.String)">
+            <summary>
+            Instantiates the deployment step to be used while creating a Web Site with a default Application.
+            </summary>
+            <param name="siteName">Web Site name.</param>
+            <param name="applicationPoolName">The name of the application pool to be used by the Web Site and its default Application.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.DeleteWebSiteStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Run the installer step.
+            </summary>
+            <param name="context">The installer step context.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.DeleteWebSiteStep.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.SetSslCertificateForWebSiteStep">
+            <summary>
+            Step to stop the site to allow the file manipulations.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.SetSslCertificateForWebSiteStep.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.SetSslCertificateForWebSiteStep.#ctor(System.String,System.Uri)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.SetSslCertificateForWebSiteStep" /> class.
+            </summary>
+            <param name="siteName">The site name.</param>
+            <param name="certificateLocation">The certificate location.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.SetSslCertificateForWebSiteStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Run the deployment step.
+            </summary>
+            <param name="context">The installer step context.</param>
+            <returns>The task resulting from the step execution.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.StopWebSiteStep">
+            <summary>
+            Step to stop the site to allow the file manipulations.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.StopWebSiteStep.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.StopWebSiteStep.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.StopWebSiteStep" /> class.
+            </summary>
+            <param name="siteName">The site name.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.StopWebSiteStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Run the deployment step.
+            </summary>
+            <param name="context">The installer step context.</param>
+            <returns>The task resulting from the step execution.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.WebSiteApplication">
+            <summary>
+            Represents an IIs Web Site's Application.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.WebSiteApplication.#ctor(System.String,System.String)">
+            <summary>
+            Creates a new instance of the class.
+            </summary>
+            <param name="path">The path of the Application in IIS.</param>
+            <param name="relativePhysicalPath">The relative physical path of the Application.</param>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.WebSiteApplication.Path">
+            <summary>
+            Gets the Path.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.WebSiteApplication.RelativePhysicalPath">
+            <summary>
+            Gets the relative physical path.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.CreateWindowGroupStep">
+            <summary>
+            Creates Windows Group.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.CreateWindowGroupStep.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.CreateWindowGroupStep.#ctor(Microsoft.Dynamics.Commerce.Installers.Framework.WindowsGroup[])">
+            <summary>
+            Creates an instance of the class.
+            </summary>
+            <param name="groups">The groups to create.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.CreateWindowGroupStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Run the installer step.
+            </summary>
+            <param name="context">The installer step context.</param>
+            <returns>The Task.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.CreateWindowGroupStep.ToString">
+            <summary>
+            Returns a user friendly description of the deployment step.
+            </summary>
+            <returns>The user friendly description of the deployment step.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.WindowsGroup">
+            <summary>
+            The Windows Group definition.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Installers.Framework.WindowsGroup.UserProhibitedSymbols">
+            <Summary>
+             For more information regarding prohibited symbols please refer to <see href="https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/bb726984(v=technet.10)?redirectedfrom=MSDN#account-naming-policies">official documentation</see>
+            </Summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.WindowsGroup.#ctor(System.String,System.String,System.String[])">
+            <summary>
+            Creates an instance of the class.
+            </summary>
+            <param name="groupName">The group name.</param>
+            <param name="groupDescription">The group description.</param>
+            <param name="users">Optional set of users to be added into the group.</param>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.WindowsGroup.Name">
+            <summary>
+            The Group's name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.WindowsGroup.Description">
+            <summary>
+            The Group's description.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.WindowsGroup.Users">
+            <summary>
+            The users to be included into the Group.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.DynamicStep">
+            <summary>
+            Implements a installer step thar runs an action.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.DynamicStep.#ctor(System.Action{Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext},System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.DynamicStep" /> class.
+            </summary>
+            <param name="action">The action to be executed.</param>
+            <param name="description">A short description of what this step is about for logging purposes.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.DynamicStep.#ctor(System.Func{Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext,System.Threading.Tasks.Task},System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.DynamicStep" /> class.
+            </summary>
+            <param name="function">The function to be executed.</param>
+            <param name="description">A short description of what this step is about for logging purposes.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.DynamicStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Run the installer step.
+            </summary>
+            <param name="context">The installer step context.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.DynamicStep.ToString">
+            <summary>
+            Provides a string representation for this instance.
+            </summary>
+            <returns>A string.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.IInstallerStep">
+            <summary>
+            Interface for installer step.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.IInstallerStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Run the installer step.
+            </summary>
+            <param name="context">The installer step context.</param>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext">
+            <summary>
+            Defines the context for a step.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext.InstallationRootDirectoryPath">
+            <summary>
+            Gets the installation root directory path.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext.Configuration">
+            <summary>
+            Gets the configuration.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext.ServiceProvider">
+            <summary>
+            Gets the service provider.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext.Logger">
+            <summary>
+            Gets the logger.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext.FileSystem">
+            <summary>
+            Gets the file system.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.PreInstallationValidationStep">
+            <summary>
+            Run validations before the installation begins.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.PreInstallationValidationStep.Events">
+            <summary>
+            Events for RetailLogger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.PreInstallationValidationStep.#ctor(System.Version)">
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Installers.Framework.PreInstallationValidationStep"/> class.
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.PreInstallationValidationStep.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Run the pre-installation version validation step.
+            </summary>
+            <param name="context">The installer step context.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.PreInstallationValidationStep.ToString">
+            <summary>
+            Provides a string representation for this instance.
+            </summary>
+            <returns>A string.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ThrowIf">
+            <summary>
+            Encapsulates helper methods used to validate arguments.
+            </summary>
+            <remarks>
+            The methods defined in this class satisfy the CA1062 violation.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ThrowIf.Null``1(``0,System.String)">
+            <summary>
+            Throws ArgumentNullException if the argument is null, otherwise passes it through.
+            </summary>
+            <typeparam name="T">The argument type.</typeparam>
+            <param name="arg">The argument to check.</param>
+            <param name="parameterName">The parameter name of the argument.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ThrowIf.NullOrWhiteSpace(System.String,System.String)">
+            <summary>
+            Throws an ArgumentNullException if the string is null or only whitespace.
+            </summary>
+            <param name="arg">The argument to check.</param>
+            <param name="parameterName">The parameter name of the argument.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Installers.Framework.ThrowIf.NullOrEmpty``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+            Throws an ArgumentException if the argument is null or empty.
+            </summary>
+            <param name="arg">The argument to check.</param>
+            <param name="parameterName">The parameter name of the argument.</param>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Installers.Framework.ThrowIf.ValidatedNotNullAttribute">
+            <summary>
+            Secret attribute that tells the CA1062 validate arguments rule that this method validates the argument is not null.
+            </summary>
+            <remarks>
+            This is an internal-only workaround. Please do not share publicly.
+            </remarks>
+        </member>
+    </members>
+</doc>

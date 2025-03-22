@@ -1,0 +1,309 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Dynamics.Commerce.Sdk.Installers</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepAdapter">
+            <summary>
+            Class responsible for adapting extension installer steps into the Commerce Installer Framework execution model.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepAdapter.#ctor(System.Type,Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepExecutionPositionAttribute)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepAdapter"/> class.
+            </summary>
+            <param name="stepType">The extension step type.</param>
+            <param name="executionPosition">The step's execution position attribute.</param>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepAdapter.Events">
+            <summary>
+            Initialize enums for new diagnostics telemetry.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepAdapter.ExtensionStepTypeName">
+            <summary>
+            Gets the extension step type name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepAdapter.ExecutionPosition">
+            <summary>
+            Gets the extension step execution position.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepAdapter.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Runs the extension step.
+            </summary>
+            <param name="context">The installer step context.</param>
+            <returns>The task resulting from the step execution.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepAdapter.ExtensionInstallerStepContext">
+            <summary>
+            The Modern Pos Extension installation path resolver.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepAdapter.ExtensionInstallerStepContext.#ctor(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext,System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepAdapter.ExtensionInstallerStepContext"/> class.
+            </summary>
+            <param name="context">The installer step context instance.</param>
+            <param name="stepType">The step type.</param>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepAdapter.ExtensionInstallerStepContext.Logger">
+            <summary>
+            Gets the logger for the extension installer step context.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepAdapter.ExtensionInstallerStepContext.PowerShellService">
+            <summary>
+            Gets the PowerShell service.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepAdapter.ExtensionInstallerStepContext.GetConfigurationValue(System.String)">
+            <summary>
+            Gets a configuration value.
+            </summary>
+            <param name="key">The configuration key.</param>
+            <returns>The configuration value.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepAdapter.ExtensionInstallerStepContext.SetConfigurationValue(System.String,System.String)">
+            <summary>
+            Sets a configuration value for the extension installer.
+            </summary>
+            <param name="key">The configuration key.</param>
+            <param name="value">The configuration value.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepAdapter.ExtensionInstallerStepContext.GetExtensionConfigurationKey(System.String)">
+            <summary>
+            Gets the extension configuration key.
+            </summary>
+            <param name="key">The core configuration key.</param>
+            <returns>The extension configuration key.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepExecutionPhase">
+            <summary>
+            Enumeration representing an extension installer step execution phase.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepExecutionPhase.None">
+            <summary>
+            No execution phase specified.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepExecutionPhase.PreInstall">
+            <summary>
+            The phase before the core installation is executed.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepExecutionPhase.PostInstall">
+            <summary>
+            The phase after the core installation is executed.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepExecutionPhase.PreUninstall">
+            <summary>
+            The phase before the core uninstall is executed.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepExecutionPhase.PostUninstall">
+            <summary>
+            The phase after the core uninstall is executed.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepExecutionPositionAttribute">
+            <summary>
+            Attribute used to define the execution position for extension installer steps.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepExecutionPositionAttribute.#ctor(Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepExecutionPhase,System.UInt32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepExecutionPositionAttribute"/> class.
+            </summary>
+            <param name="executionPhase">The installation phase during which the step should be executed.</param>
+            <param name="executionOrder">The order in which the step should be executed. Steps will be executed in ascending order.</param>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepExecutionPositionAttribute.ExecutionPhase">
+            <summary>
+            Gets the execution phase for the installer step.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepExecutionPositionAttribute.ExecutionOrder">
+            <summary>
+            Gets the execution order for the installer step.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup">
+            <summary>
+            Base class representing all extension package installer setups.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup.installerAssembly">
+            <summary>
+            The installer assembly.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup.extensionInstallerSteps">
+            <summary>
+            The extension installer steps.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup.installSteps">
+            <summary>
+            Install steps.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup.uninstallSteps">
+            <summary>
+            Uninstall steps.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup.#ctor(System.Reflection.Assembly)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup"/> class.
+            </summary>
+            <param name="installerAssembly">The installer assembly.</param>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup"/> class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup.ExtensionName">
+            <inheritdoc/>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup.Operations">
+            <inheritdoc/>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup.PreDeploymentSteps">
+            <inheritdoc/>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup.InstallSteps">
+            <summary>
+            Gets the installation steps.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup.UninstallSteps">
+            <summary>
+            Gets the uninstall steps.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup.CoreInstallSteps">
+            <summary>
+            Gets the core/stock install steps for the extension installer.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup.CoreUninstallSteps">
+            <summary>
+            Gets the core/stock uninstall steps for the extension installer.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup.CorePreInstallSteps">
+            <summary>
+            Gets the core/stock pre-install steps for the extension installer.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup.GetExtensionSteps">
+            <summary>
+            Gets the extension installer step adapters for the extension steps in the installer assembly.
+            </summary>
+            <returns>The collection of extension steps.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup.LogExtensionInstallerStepSummary">
+            <summary>
+            Installer step to log the extension installer step summary information.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup.LogExtensionInstallerStepSummary.#ctor(System.String,System.Boolean,System.Collections.Generic.IEnumerable{Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepAdapter},System.Collections.Generic.IEnumerable{Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepAdapter},System.Collections.Generic.IEnumerable{Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepAdapter})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup.LogExtensionInstallerStepSummary"/> class.
+            </summary>
+            <param name="extensionName">The name of the extension.</param>
+            <param name="isInstall">True, if install actio. Otherwise, false.</param>
+            <param name="preSteps">The extension steps that will run before the core installation.</param>
+            <param name="postSteps">The extension steps that will run after the core installation.</param>
+            <param name="noneSteps">The extension steps that are not configured to run during any installation phase.</param>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup.LogExtensionInstallerStepSummary.Events">
+            <summary>
+            Initialize enums for new diagnostics telemetry.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup.LogExtensionInstallerStepSummary.Run(Microsoft.Dynamics.Commerce.Installers.Framework.InstallerStepContext)">
+            <summary>
+            Runs the installer step.
+            </summary>
+            <param name="context">The installer step context.</param>
+            <returns>The task resulting from the step execution.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup.ExtensionInstallerStepAdapterExecutionOrderComparer">
+            <summary>
+            Class that compares extension installer step adapters to determine which should be executed first.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionPackageInstallerSetup.ExtensionInstallerStepAdapterExecutionOrderComparer.Compare(Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepAdapter,Microsoft.Dynamics.Commerce.Sdk.Installers.ExtensionInstallerStepAdapter)">
+            <summary>
+            Compares the extension step adapters to determine which should be executed first.
+            </summary>
+            <param name="left">The first extension step adapter.</param>
+            <param name="right">The second extension step adapter.</param>
+            <returns>Less than zero if left precedes right in the sort order. Zero if they occur in the same position. Greater than zero if left follows right in the sort order.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Sdk.Installers.IExtensionInstallerStep">
+            <summary>
+            Interface representing an extension installer step.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Sdk.Installers.IExtensionInstallerStep.Name">
+            <summary>
+            Gets the installer step name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Sdk.Installers.IExtensionInstallerStep.DisplayName">
+            <summary>
+            Gets the installer step display name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Sdk.Installers.IExtensionInstallerStep.Description">
+            <summary>
+            Gets the installer step description.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Sdk.Installers.IExtensionInstallerStep.Run(Microsoft.Dynamics.Commerce.Sdk.Installers.IExtensionInstallerStepContext)">
+            <summary>
+            Runs the installer step.
+            </summary>
+            <param name="context">The installer step context.</param>
+            <returns>The task representing the result of the step execution.</returns>
+        </member>
+        <member name="T:Microsoft.Dynamics.Commerce.Sdk.Installers.IExtensionInstallerStepContext">
+            <summary>
+            Interface representing the context that is provided to an extension installer step.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Sdk.Installers.IExtensionInstallerStepContext.Logger">
+            <summary>
+            Gets the logger for the installer step.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Dynamics.Commerce.Sdk.Installers.IExtensionInstallerStepContext.PowerShellService">
+            <summary>
+            Gets the PowerShell service for the installer step.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Sdk.Installers.IExtensionInstallerStepContext.GetConfigurationValue(System.String)">
+            <summary>
+            Gets the configuration value for the specified key.
+            </summary>
+            <param name="key">The configuration key.</param>
+            <returns>The value.</returns>
+        </member>
+        <member name="M:Microsoft.Dynamics.Commerce.Sdk.Installers.IExtensionInstallerStepContext.SetConfigurationValue(System.String,System.String)">
+            <summary>
+            Sets the configuration value.
+            </summary>
+            <param name="key">The configuration key.</param>
+            <param name="value">The configuration value.</param>
+        </member>
+    </members>
+</doc>

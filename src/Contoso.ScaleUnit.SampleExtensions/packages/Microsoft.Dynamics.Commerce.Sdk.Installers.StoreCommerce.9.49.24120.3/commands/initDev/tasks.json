@@ -1,0 +1,34 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "%%BuildAndInstallTaskName%%",
+            "type": "shell",
+            "command": "msbuild",
+            "args": [
+                "/p:Configuration=debug",
+                "/p:InstallStoreCommerceExtensionsAfterBuild=true",
+                "/t:build",
+                "/m",
+                "/consoleloggerparameters:NoSummary",
+                "%%SolutionFile%%"
+            ],
+            "group": {
+                "kind": "build"
+            },
+			"options": {
+                "env": {
+                    "PATH": "%%MSBuildToolsPath%%;${env:PATH}"
+                }
+            },
+			"presentation": {
+                "reveal": "silent"
+            },
+			"problemMatcher": "$msCompile",
+            "commerceSdk": {
+                "id": "build_%%SolutionName%%_installStoreCommerce",
+                "version": "%%StoreCommerceSdkVersion%%"
+            }
+        }
+    ]
+}
