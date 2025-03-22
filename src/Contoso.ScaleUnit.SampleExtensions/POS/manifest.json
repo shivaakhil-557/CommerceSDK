@@ -1,0 +1,899 @@
+﻿{
+  "$schema": "./devDependencies/schemas/manifestSchema.json",
+  "name": "Contoso.Pos.SampleExtensions",
+  "publisher": "Contoso",
+  "version": "1.0.0",
+  "minimumPosVersion": "9.45.0.0",
+  "description": "An extension package containing sample code that makes use of a Retail Server extension. Also works off-line.",
+  "dependencies": [
+    {
+      "alias": "knockout",
+      "format": "amd",
+      "modulePath": "Libraries/knockout"
+    }
+  ],
+  "components": {
+    "resources": {
+      "name": "Resources",
+      "description": "Resources used as labels to provide descriptive information regarding POS messages.",
+      "supportedUICultures": [ "en-US" ],
+      "fallbackUICulture": "en-US",
+      "culturesDirectoryPath": "Resources/Strings",
+      "stringResourcesFileName": "resources.resjson"
+    },
+    "dualDisplay": {
+      "customControl": {
+        "name": "DualDisplayExtension",
+        "description": "Dual display extension",
+        "controlName": "DualDisplayCustomControl",
+        "htmlPath": "ViewExtensions/CustomControl/DualDisplayCustomControl.html",
+        "modulePath": "ViewExtensions/CustomControl/DualDisplayCustomControl"
+      }
+    },
+    "extend": {
+      "header": {
+        "customPackingItems": [
+          {
+            "name": "Gas Pump Status Header Item",
+            "description": "An item showing the gas pump status on the POS header.",
+            "modulePath": "ViewExtensions/Header/GasPumpStatusPackingItem",
+            "htmlPath": "ViewExtensions/Header/GasPumpStatusPackingItem.html"
+          },
+          {
+            "name": "Samples View Header Item",
+            "description": "An item links to the extension samples on the POS header.",
+            "modulePath": "ViewExtensions/Header/SamplesViewPackingItem",
+            "htmlPath": "ViewExtensions/Header/SamplesViewPackingItem.html"
+          },
+          {
+            "name": "CartAmountDuePackingItem",
+            "htmlPath": "ViewExtensions/Header/CartAmountDuePackingItem.html",
+            "modulePath": "ViewExtensions/Header/CartAmountDuePackingItem"
+          }
+        ]
+      },
+      "triggers": [
+        {
+          "name": "PreLogOnTrigger",
+          "description": "A trigger to validate the operator id while logging to POS",
+          "modulePath": "Triggers/PreLogOnTrigger",
+          "triggerType": "PreLogOn"
+        },
+        {
+          "name": "ConfirmChangeQuantityTrigger",
+          "description": "A sample trigger showing how to implement a cancelable trigger. Adds a dialog to the Set Quantity flow requesting user confirmation prior to changing quantity.",
+          "triggerType": "PreSetQuantity",
+          "modulePath": "Triggers/ConfirmChangeQuantityTrigger"
+        },
+        {
+          "name": "ChangeUnitOfMeasurePostProductSaleTrigger",
+          "description": "A sample trigger showing how to implement a noncancellable trigger. Automatically changes the unit of measure of Product 81212 to 'Dozen' when modifying the cart.",
+          "triggerType": "PostProductSale",
+          "modulePath": "Triggers/ChangeUnitOfMeasurePostProductSaleTrigger"
+        },
+        {
+          "name": "BeepSoundPostProductSaleTrigger",
+          "description": "A sample trigger showing how to use resource files in extension. Automatically plays a beep sound when adding product to the cart.",
+          "triggerType": "PostProductSale",
+          "modulePath": "Triggers/BeepSoundPostProductSaleTrigger"
+        },
+        {
+          "name": "CreditCardOnlyPreSelectTransactionPaymentMethod",
+          "description": "A sample trigger showing how to implement a data modification trigger. Filters out all payment methods except for credit cards.",
+          "triggerType": "PreSelectTransactionPaymentMethod",
+          "modulePath": "Triggers/CreditCardOnlyPreSelectTransactionPaymentMethod"
+        },
+        {
+          "name": "ForceErrorPreProductSaleTrigger",
+          "description": "A sample trigger showing how to return an error. Shows an error dialog when trying to add Product 81213 to the cart.",
+          "triggerType": "PreProductSale",
+          "modulePath": "Triggers/ForceErrorPreProductSaleTrigger"
+        },
+        {
+          "triggerType": "PreProductSale",
+          "modulePath": "Triggers/PreProductSaleTrigger"
+        },
+        {
+          "triggerType": "PreProductSale",
+          "modulePath": "Triggers/InfoLoggingPreProductSaleTrigger"
+        },
+        {
+          "triggerType": "PostProductSale",
+          "modulePath": "Triggers/PostProductSaleTrigger"
+        },
+        {
+          "triggerType": "ApplicationStart",
+          "modulePath": "Triggers/ApplicationStartTrigger"
+        },
+        {
+          "triggerType": "ApplicationSuspend",
+          "modulePath": "Triggers/ApplicationSuspendTrigger"
+        },
+        {
+          "triggerType": "PrePrintReceiptCopy",
+          "modulePath": "Triggers/PrePrintReceiptCopyTrigger"
+        },
+        {
+          "triggerType": "PostGetSerialNumber",
+          "modulePath": "Triggers/PostGetSerialNumberTrigger"
+        },
+        {
+          "triggerType": "PostGetGiftCardNumber",
+          "modulePath": "Triggers/PostGetGiftCardNumberTrigger"
+        },
+        {
+          "triggerType": "PostProductSale",
+          "modulePath": "Triggers/ChangeUnitOfMeasurePostProductSaleTrigger"
+        },
+        {
+          "triggerType": "PreGetLoyaltyCardBalance",
+          "modulePath": "Triggers/PreGetLoyaltyCardBalanceTrigger"
+        },
+        {
+          "triggerType": "PreDisplayLoyaltyCardBalance",
+          "modulePath": "Triggers/PreDisplayLoyaltyCardBalanceTrigger"
+        },
+        {
+          "triggerType": "PostGetLoyaltyCardBalance",
+          "modulePath": "Triggers/PostGetLoyaltyCardBalanceTrigger"
+        },
+        {
+          "triggerType": "PreCreatePackingSlip",
+          "modulePath": "Triggers/PreCreatePackingSlipTrigger"
+        },
+        {
+          "triggerType": "PreCustomerSave",
+          "modulePath": "Triggers/PreCustomerSaveTrigger"
+        },
+        {
+          "triggerType": "PostCustomerSave",
+          "modulePath": "Triggers/PostCustomerSaveTrigger"
+        },
+        {
+          "triggerType": "PreFloatEntry",
+          "modulePath": "Triggers/PreFloatEntryTrigger"
+        },
+        {
+          "triggerType": "PostFloatEntry",
+          "modulePath": "Triggers/PostFloatEntryTrigger"
+        },
+        {
+          "triggerType": "PreMarkFulfillmentLinesAsPacked",
+          "modulePath": "Triggers/PreMarkFulfillmentLinesAsPackedTrigger"
+        },
+        {
+          "triggerType": "PreShipFulfillmentLines",
+          "modulePath": "Triggers/PreShipFulfillmentLinesTrigger"
+        },
+        {
+          "triggerType": "PostReceiptPrompt",
+          "modulePath": "Triggers/PostReceiptPromptTrigger"
+        },
+        {
+          "triggerType": "PreSearchOrders",
+          "modulePath": "Triggers/PreSearchOrdersTrigger"
+        },
+        {
+          "triggerType": "PostLogon",
+          "modulePath": "Triggers/PostLogonTrigger"
+        }
+      ],
+      "fieldDefinitions": [
+        {
+          "name": "Address add edit view field definitions",
+          "description": "Defines custom field properties for adding/editing address view.",
+          "definitionType": "AddressAddEditFieldDefinitions",
+          "modulePath": "FieldDefinitions/AddressAddEditFieldDefinitions"
+        },
+        {
+          "name": "Customer add edit view field definitions",
+          "description": "Defines custom field properties for adding/editing customer view.",
+          "definitionType": "CustomerAddEditFieldDefinitions",
+          "modulePath": "FieldDefinitions/CustomerAddEditFieldDefinitions"
+        }
+      ],
+      "requestHandlers": [
+        {
+          "name": "Auto Key in Gas Quantity Request Handler",
+          "description": "An extension for the get keyed in quantity request handler that automatically keys in the gasoline quantity",
+          "modulePath": "RequestHandlers/KeyInGasolineQuantityRequestHandler"
+        },
+        {
+          "modulePath": "RequestHandlers/CashDrawerOpenRequestHandlerExt"
+        },
+        {
+          "modulePath": "RequestHandlers/DepositOverrideOperationRequestHandlerExt"
+        },
+        {
+          "modulePath": "RequestHandlers/GetCancellationChargeClientRequestHandlerExt"
+        },
+        {
+          "modulePath": "RequestHandlers/GetScanResultClientRequestHandlerExt"
+        },
+        {
+          "modulePath": "RequestHandlers/GetSerialNumberClientRequestHandlerExt"
+        },
+        {
+          "modulePath": "RequestHandlers/GetKeyedInPriceClientRequestHandlerExt"
+        },
+        {
+          "modulePath": "RequestHandlers/GetPickupDateClientRequestHandlerExt"
+        },
+        {
+          "modulePath": "RequestHandlers/GetReportParametersClientRequestHandlerExt"
+        },
+        {
+          "modulePath": "RequestHandlers/GetTenderDetailsClientRequestHandlerExt"
+        },
+        {
+          "modulePath": "RequestHandlers/PrintPackingSlipClientRequestHandlerExt"
+        },
+        {
+          "modulePath": "RequestHandlers/GetShippingDateClientRequestHandlerExt"
+        },
+        {
+          "modulePath": "RequestHandlers/GetRefinerValuesByTextServiceRequestHandlerExt"
+        },
+        {
+          "modulePath": "RequestHandlers/ShowChangeDueClientRequestHandlerExt"
+        },
+        {
+          "modulePath": "RequestHandlers/GetReceiptEmailAddressClientRequestHandlerExt"
+        },
+        {
+          "modulePath": "RequestHandlers/SelectZipCodeInfoClientRequestHandlerExt"
+        },
+        {
+          "modulePath": "RequestHandlers/LoyaltyCardPointsBalanceOperationRequestHandlerExt"
+        },
+        {
+          "modulePath": "RequestHandlers/GetShippingChargeClientRequestHandlerExt"
+        },
+        {
+          "modulePath": "RequestHandlers/GetCountedTenderDetailAmountClientRequestHandlerExt"
+        }
+      ],
+      "views": {
+        "AddressAddEditView": {
+          "controlsConfig": {
+            "customControls": [
+              {
+                "controlName": "addressAddEditCustomFieldsSection",
+                "htmlPath": "ViewExtensions/AddressAddEdit/AddressAddEditCustomFieldsSection.html",
+                "modulePath": "ViewExtensions/AddressAddEdit/AddressAddEditCustomFieldsSection"
+              }
+            ]
+          },
+          "appBarCommands": [
+            {
+              "modulePath": "ViewExtensions/AddressAddEdit/GetExternalAddressCommand"
+            }
+          ]
+        },
+        "CartView": {
+          "viewController": {
+            "modulePath": "ViewExtensions/Cart/CartViewController"
+          },
+          "linesGrid": {
+            "customColumn1": {
+              "modulePath": "ViewExtensions/Cart/LinesGrid/CustomColumn1Configuration"
+            },
+            "customColumn2": {
+              "modulePath": "ViewExtensions/Cart/LinesGrid/CustomColumn2Configuration"
+            },
+            "customColumn3": {
+              "modulePath": "ViewExtensions/Cart/LinesGrid/CustomColumn3Configuration"
+            },
+            "customColumn4": {
+              "modulePath": "ViewExtensions/Cart/LinesGrid/CustomColumn4Configuration"
+            },
+            "customColumn5": {
+              "modulePath": "ViewExtensions/Cart/LinesGrid/CustomColumn5Configuration"
+            },
+            "customItemSubfields": [
+              {
+                "itemSubfieldName": "fraudCheckReminderItemSubfield",
+                "modulePath": "ViewExtensions/Cart/LinesGrid/FraudCheckReminderItemSubfield"
+              },
+              {
+                "itemSubfieldName": "subscribeAndSaveItemSubfield",
+                "modulePath": "ViewExtensions/Cart/LinesGrid/SubscribeAndSaveItemSubfield"
+              }
+            ]
+          },
+          "paymentsGrid": {
+            "customColumn1": {
+              "modulePath": "ViewExtensions/Cart/PaymentsGrid/CustomColumn1Configuration"
+            }
+          },
+          "deliveryGrid": {
+            "customColumn1": {
+              "modulePath": "ViewExtensions/Cart/DeliveryGrid/CustomColumn1Configuration"
+            }
+          },
+          "controlsConfig": {
+            "customControls": [
+              {
+                "controlName": "lineDetails",
+                "htmlPath": "ViewExtensions/Cart/LineDetailsCustomControl.html",
+                "modulePath": "ViewExtensions/Cart/LineDetailsCustomControl"
+              },
+              {
+                "controlName": "customerDetails",
+                "htmlPath": "ViewExtensions/Cart/CustomerDetailsCustomControl.html",
+                "modulePath": "ViewExtensions/Cart/CustomerDetailsCustomControl"
+              }
+            ]
+          },
+          "totalsPanel": {
+            "customFields": [
+              {
+                "fieldName": "TipsField",
+                "modulePath": "ViewExtensions/Cart/TipsCustomField"
+              }
+            ]
+          }
+        },
+        "ShippingMethodsView": {
+          "viewController": {
+            "modulePath": "ViewExtensions/ShippingMethods/ShippingMethodsViewController"
+          }
+        },
+        "CustomerAddEditView": {
+          "appBarCommands": [
+            {
+              "modulePath": "ViewExtensions/CustomerAddEdit/GetExternalCustomerCommand"
+            },
+            {
+              "modulePath": "ViewExtensions/CustomerAddEdit/GetExistingCustomerCommand"
+            },
+            {
+              "modulePath": "ViewExtensions/CustomerAddEdit/GetExistingCustomerCommandV2"
+            }
+          ],
+          "controlsConfig": {
+            "customControls": [
+              {
+                "controlName": "customFieldsSection",
+                "htmlPath": "ViewExtensions/CustomerAddEdit/CustomFieldsSection.html",
+                "modulePath": "ViewExtensions/CustomerAddEdit/CustomFieldsSection"
+              }
+            ]
+          }
+        },
+        "CustomerDetailsView": {
+          "appBarCommands": [
+            {
+              "modulePath": "ViewExtensions/CustomerDetails/DisplayCustomerSummaryCommand"
+            }
+          ],
+          "controlsConfig": {
+            "customControls": [
+              {
+                "controlName": "customerDetailsFriendsPanel",
+                "htmlPath": "ViewExtensions/CustomerDetails/CustomerDetailsFriendsPanel.html",
+                "modulePath": "ViewExtensions/CustomerDetails/CustomerDetailsFriendsPanel"
+              },
+              {
+                "controlName": "restrictAffiliationCreation",
+                "htmlPath": "ViewExtensions/CustomerDetails/RestrictAffiliationCreation.html",
+                "modulePath": "ViewExtensions/CustomerDetails/RestrictAffiliationCreation"
+              }
+            ]
+          }
+        },
+        "InventoryLookupMatrixView": {
+          "cellInteractionMenu": {
+            "customCommands": [
+              {
+                "modulePath": "ViewExtensions/InventoryLookupMatrix/MoreDetailsMenuCommand"
+              }
+            ]
+          }
+        },
+        "InventoryLookupView": {
+          "appBarCommands": [
+            {
+              "modulePath": "ViewExtensions/InventoryLookup/DownloadDocCommand"
+            }
+          ],
+          "inventoryByStoreListConfiguration": {
+            "modulePath": "ViewExtensions/InventoryLookup/CustomInventoryByStoreListColumns"
+          }
+        },
+        "FulfillmentLineView": {
+          "appBarCommands": [
+            {
+              "modulePath": "ViewExtensions/FulfillmentLine/FulfillmentLineCommand"
+            }
+          ],
+          "customSortColumns": [
+            {
+              "modulePath": "ViewExtensions/FulfillmentLine/DeliveryModeSortColumn"
+            }
+          ]
+        },
+        "ManageShiftsView": {
+          "appBarCommands": [
+            {
+              "modulePath": "ViewExtensions/ManageShifts/ManageShiftsCommand"
+            }
+          ]
+        },
+        "PaymentView": {
+          "appBarCommands": [
+            {
+              "modulePath": "ViewExtensions/Payment/PaymentViewCommand"
+            }
+          ]
+        },
+        "PickingAndReceivingDetailsView": {
+          "appBarCommands": [
+            {
+              "modulePath": "ViewExtensions/PickingAndReceivingDetails/PickingAndReceivingDetailsCmd"
+            }
+          ],
+          "orderLinesListConfiguration": {
+            "modulePath": "ViewExtensions/PickingAndReceivingDetails/CustomOrderLinesListColumns"
+          }
+        },
+        "ResumeCartView": {
+          "suspendedCartsListConfiguration": {
+            "modulePath": "ViewExtensions/ResumeCart/ResumeCartListColumns"
+          }
+        },
+        "SearchOrdersView": {
+          "appBarCommands": [
+            {
+              "modulePath": "ViewExtensions/SearchOrders/SampleSearchOrdersCommand"
+            }
+          ],
+          "ordersListConfiguration": {
+            "modulePath": "ViewExtensions/SearchOrders/CustomOrdersListColumns"
+          },
+          "searchFilters": [
+            {
+              "modulePath": "ViewExtensions/SearchOrders/SampleOrderSearchTextFilter"
+            }
+          ]
+        },
+        "SearchPickingAndReceivingView": {
+          "appBarCommands": [
+            {
+              "modulePath": "ViewExtensions/SearchPickingAndReceiving/SearchPickingAndReceivingCmd"
+            }
+          ],
+          "ordersListConfiguration": {
+            "modulePath": "ViewExtensions/SearchPickingAndReceiving/CustomOrdersListColumns"
+          }
+        },
+        "SearchView": {
+          "productListConfiguration": {
+            "name": "Customized Product Search Columns",
+            "description": "An extension providing a customized set of columns on the product search grid.",
+            "modulePath": "ViewExtensions/Search/CustomProductSearchColumns"
+          },
+          "productAppBarCommands": [
+            { "modulePath": "ViewExtensions/Search/NavigateToKnockoutSamplesViewCommand" },
+            { "modulePath": "ViewExtensions/Search/NavigateToExampleViewCommand" },
+            { "modulePath": "ViewExtensions/Search/QuickCompareProductsCommand" },
+            { "modulePath": "ViewExtensions/Search/NavigateToSamplesViewCommand" }
+          ],
+          "customerAppBarCommands": [
+            { "modulePath": "ViewExtensions/Search/ViewCustomerSummaryCommand" },
+            { "modulePath": "ViewExtensions/Search/NavigateBackToCustomerAddEditCommand" }
+          ],
+          "customerListConfiguration": {
+            "modulePath": "ViewExtensions/Search/CustomCustomerSearchColumns"
+          }
+        },
+        "ShowJournalView": {
+          "appBarCommands": [
+            {
+              "modulePath": "ViewExtensions/ShowJournal/DownloadDocumentCommand"
+            }
+          ],
+          "transactionListConfiguration": {
+            "modulePath": "ViewExtensions/ShowJournal/TransactionListColumns"
+          },
+          "customerOrderHistoryListConfiguration": {
+            "modulePath": "ViewExtensions/ShowJournal/CustomerOrderHistoryListColumns"
+          },
+          "searchFilters": [
+            {
+              "modulePath": "ViewExtensions/ShowJournal/SampleTransactionSearchTextFilter"
+            }
+          ],
+          "linesGrid": {
+            "customItemSubfields": [
+              {
+                "itemSubfieldName": "fraudCheckReminderItemSubfield",
+                "modulePath": "ViewExtensions/ShowJournal/LinesGrid/FraudCheckReminderItemSubfield"
+              },
+              {
+                "itemSubfieldName": "subscribeAndSaveItemSubfield",
+                "modulePath": "ViewExtensions/ShowJournal/LinesGrid/SubscribeAndSaveItemSubfield"
+              }
+            ]
+          }
+        },
+        "SimpleProductDetailsView": {
+          "controlsConfig": {
+            "customControls": [
+              {
+                "controlName": "productAvailabilityPanel",
+                "htmlPath": "ViewExtensions/SimpleProductDetails/ProductAvailabilityPanel.html",
+                "modulePath": "ViewExtensions/SimpleProductDetails/ProductAvailabilityPanel"
+              }
+            ]
+          },
+          "appBarCommands": [
+            {
+              "name": "PumpGasExtensionCommand",
+              "description": "An app bar command button to operate gas pump",
+              "modulePath": "ViewExtensions/SimpleProductDetails/PumpGasExtensionCommand"
+            }
+          ]
+        },
+        "PriceCheckView": {
+          "controlsConfig": {
+            "customControls": [
+              {
+                "controlName": "priceCheckPanel",
+                "htmlPath": "ViewExtensions/PriceCheck/PriceCheckCustomControlPanel.html",
+                "modulePath": "ViewExtensions/PriceCheck/PriceCheckCustomControlPanel"
+              }
+            ]
+          }
+        },
+        "ReportDetailsView": {
+          "appBarCommands": [
+            {
+              "modulePath": "ViewExtensions/ReportDetails/ReportDetailsCommand"
+            }
+          ]
+        },
+        "ReturnTransactionView": {
+          "appBarCommands": [
+            {
+              "modulePath": "ViewExtensions/ReturnTransaction/ReturnTransactionCommand"
+            }
+          ],
+          "salesOrderLinesGrid": {
+            "customItemSubfields": [
+              {
+                "itemSubfieldName": "fraudCheckReminderItemSubfield",
+                "modulePath": "ViewExtensions/ReturnTransaction/LinesGrid/FraudCheckReminderItemSubfield"
+              }
+            ]
+          }
+        },
+        "StockCountDetailsView": {
+          "appBarCommands": [
+            {
+              "modulePath": "ViewExtensions/StockCountDetails/StockCountDetailsCommand"
+            }
+          ]
+        },
+        "HealthCheckView": {
+          "customHealthChecks": [
+            {
+              "name": "customHealthCheck",
+              "modulePath": "ViewExtensions/HealthCheck/CustomHealthCheck"
+            }
+          ]
+        }
+      }
+    },
+    "create": {
+      "templatedDialogs": [
+        {
+          "htmlPath": "Controls/Dialogs/Create/DialogSample/DialogSample.html",
+          "modulePath": "Controls/Dialogs/Create/DialogSample/DialogSampleModule"
+        },
+        {
+          "htmlPath": "Controls/Dialogs/Create/BarcodeMsrDialog/BarcodeMsrDialog.html",
+          "modulePath": "Controls/Dialogs/Create/BarcodeMsrDialog/BarcodeMsrDialog"
+        },
+        {
+          "htmlPath": "Controls/Dialogs/Create/GiftCardBalanceDialog/GiftCardBalanceDialog.html",
+          "modulePath": "Controls/Dialogs/Create/GiftCardBalanceDialog/GiftCardBalanceDialog"
+        },
+        {
+          "htmlPath": "Controls/Dialogs/Create/Example/ExampleCreateDialog.html",
+          "modulePath": "Controls/Dialogs/Create/Example/ExampleCreateDialogModule"
+        },
+        {
+          "htmlPath": "Controls/Dialogs/Edit/ExampleEditDialog.html",
+          "modulePath": "Controls/Dialogs/Edit/ExampleEditDialogModule"
+        },
+        {
+          "htmlPath": "Controls/Dialogs/Display/PingResultDialog.html",
+          "modulePath": "Controls/Dialogs/Display/PingResultDialogModule"
+        },
+        {
+          "name": "Gas Station Details Dialog",
+          "description": "A dialog showing the details of the gas station.",
+          "modulePath": "Controls/Dialogs/Create/GasStation/GasStationDetailsDialog",
+          "htmlPath": "Controls/Dialogs/Create/GasStation/GasStationDetailsDialog.html"
+        },
+        {
+          "name": "Gas Pump Simulator Dialog",
+          "description": "A dialog showing a gas pump simulator.",
+          "modulePath": "Controls/Dialogs/Create/GasStation/PumpGasDialog",
+          "htmlPath": "Controls/Dialogs/Create/GasStation/PumpGasDialog.html"
+        },
+        {
+          "name": "Search Customers in Azure B2C Dialog ",
+          "description": "A dialog to search existing customers in Azure B2C.",
+          "modulePath": "Controls/Dialogs/Create/SearchCustomersInB2C/SearchCustomersInB2CDialogModule",
+          "htmlPath": "Controls/Dialogs/Create/SearchCustomersInB2C/SearchCustomersInB2CDialog.html"
+        },
+        {
+          "name": "Confirm Dialog Module ",
+          "description": "A dialog to ask confirmation for user to proceed.",
+          "modulePath": "Controls/Dialogs/Display/ConfirmDialogModule",
+          "htmlPath": "Controls/Dialogs/Display/ConfirmDialog.html"
+        },
+        {
+          "name": "Customer Search Dialog Module ",
+          "description": "A dialog to search existing customers.",
+          "modulePath": "Controls/Dialogs/Create/GenericCustomerSearch/GenericCustomerSearchDialogModule",
+          "htmlPath": "Controls/Dialogs/Create/GenericCustomerSearch/GenericCustomerSearchDialog.html"
+        }
+      ],
+      "views": [
+        {
+          "title": "Sample Extension View",
+          "pageName": "ExampleView",
+          "phonePageName": "ExampleView",
+          "viewDirectory": "Views/",
+          "viewControllerPath": "Views/ExampleView"
+        },
+        {
+          "name": "Gas Pump Status View",
+          "description": "The view showing the status of the gas pumps",
+          "pageName": "GasPumpStatusView",
+          "phonePageName": "GasPumpStatusView",
+          "viewDirectory": "Views/",
+          "viewControllerPath": "Views/GasPumpStatusView"
+        },
+        {
+          "title": "Knockout Samples View",
+          "pageName": "KnockoutSamplesView",
+          "phonePageName": "KnockoutSamplesView",
+          "viewDirectory": "Views/",
+          "viewControllerPath": "Views/KnockoutSamplesView"
+        },
+        {
+          "title": "Samples View",
+          "pageName": "SamplesView",
+          "phonePageName": "SamplesView",
+          "viewDirectory": "Views/",
+          "viewControllerPath": "Views/SamplesView"
+        },
+        {
+          "title": "Simple View Test",
+          "pageName": "SimpleExtensionView",
+          "phonePageName": "SimpleExtensionView",
+          "viewDirectory": "Views/",
+          "viewControllerPath": "Views/SimpleExtensionView"
+        },
+        {
+          "title": "Simple Next View",
+          "pageName": "SimpleNextView",
+          "phonePageName": "SimpleNextView",
+          "viewDirectory": "Views/",
+          "viewControllerPath": "Views/SimpleNextView"
+        },
+        {
+          "title": "AddTenderLineToCartView",
+          "pageName": "AddTenderLineToCartView",
+          "phonePageName": "AddTenderLineToCartView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/AddTenderLineToCartView"
+        },
+        {
+          "title": "AlphanumericNumPadView",
+          "pageName": "AlphanumericNumPadView",
+          "phonePageName": "AlphanumericNumPadView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/AlphanumericNumPadView"
+        },
+        {
+          "title": "TextInputDialogView",
+          "pageName": "TextInputDialogView",
+          "phonePageName": "TextInputDialogView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/TextInputDialogView"
+        },
+        {
+          "title": "ApiView",
+          "pageName": "ApiView",
+          "phonePageName": "ApiView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/ApiView"
+        },
+        {
+          "title": "AppBarView",
+          "pageName": "AppBarView",
+          "phonePageName": "AppBarView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/AppBarView"
+        },
+        {
+          "title": "CurrencyNumPadView",
+          "pageName": "CurrencyNumPadView",
+          "phonePageName": "CurrencyNumPadView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/CurrencyNumPadView"
+        },
+        {
+          "title": "DataListView",
+          "pageName": "DataListView",
+          "phonePageName": "DataListView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/DataListView"
+        },
+        {
+          "title": "DatePickerView",
+          "pageName": "DatePickerView",
+          "phonePageName": "DatePickerView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/DatePickerView"
+        },
+        {
+          "title": "DynamicDataListView",
+          "pageName": "DynamicDataListView",
+          "phonePageName": "DynamicDataListView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/DynamicDataListView"
+        },
+        {
+          "title": "ForceVoidTransactionView",
+          "pageName": "ForceVoidTransactionView",
+          "phonePageName": "ForceVoidTransactionView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/ForceVoidTransactionView"
+        },
+        {
+          "title": "LoaderView",
+          "pageName": "LoaderView",
+          "phonePageName": "LoaderView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/LoaderView"
+        },
+        {
+          "title": "MenuView",
+          "pageName": "MenuView",
+          "phonePageName": "MenuView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/MenuView"
+        },
+        {
+          "title": "AlphanumericInputDialogView",
+          "pageName": "AlphanumericInputDialogView",
+          "phonePageName": "AlphanumericInputDialogView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/AlphanumericInputDialogView"
+        },
+        {
+          "title": "NumericInputDialogView",
+          "pageName": "NumericInputDialogView",
+          "phonePageName": "NumericInputDialogView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/NumericInputDialogView"
+        },
+        {
+          "title": "ListInputDialogView",
+          "pageName": "ListInputDialogView",
+          "phonePageName": "ListInputDialogView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/ListInputDialogView"
+        },
+        {
+          "title": "NumericNumPadView",
+          "pageName": "NumericNumPadView",
+          "phonePageName": "NumericNumPadView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/NumericNumPadView"
+        },
+        {
+          "title": "TimePickerView",
+          "pageName": "TimePickerView",
+          "phonePageName": "TimePickerView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/TimePickerView"
+        },
+        {
+          "title": "ToggleMenuView",
+          "pageName": "ToggleMenuView",
+          "phonePageName": "ToggleMenuView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/ToggleMenuView"
+        },
+        {
+          "title": "ToggleSwitchView",
+          "pageName": "ToggleSwitchView",
+          "phonePageName": "ToggleSwitchView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/ToggleSwitchView"
+        },
+        {
+          "title": "CloseShiftView",
+          "pageName": "CloseShiftView",
+          "phonePageName": "CloseShiftView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/CloseShiftView"
+        },
+        {
+          "title": "VoidCartLineView",
+          "pageName": "VoidCartLineView",
+          "phonePageName": "VoidCartLineView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/VoidCartLineView"
+        },
+        {
+          "title": "SyncStockCountJournalsView",
+          "pageName": "SyncStockCountJournalsView",
+          "phonePageName": "SyncStockCountJournalsView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/SyncStockCountJournalsView"
+        },
+        {
+          "title": "VoidTenderLineView",
+          "pageName": "VoidTenderLineView",
+          "phonePageName": "VoidTenderLineView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/VoidTenderLineView"
+        },
+        {
+          "title": "PostLogOnView",
+          "pageName": "PostLogOnView",
+          "phonePageName": "PostLogOnView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/PostLogOnView"
+        },
+        {
+          "title": "TransactionNumPadView",
+          "pageName": "TransactionNumPadView",
+          "phonePageName": "TransactionNumPadView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/TransactionNumPadView"
+        }
+      ],
+      "requestHandlers": [
+        {
+          "modulePath": "RequestHandlers/SendEmailRequestHandler"
+        }
+      ],
+      "operations": [
+        {
+          "operationId": "5000",
+          "operationRequestFactoryPath": "Operations/Print/PrintOperationRequestFactory",
+          "operationRequestHandlerPath": "Operations/Print/PrintOperationRequestHandler"
+        },
+        {
+          "operationId": "5001",
+          "operationRequestFactoryPath": "Operations/EndOfDay/EndOfDayOperationRequestFactory",
+          "operationRequestHandlerPath": "Operations/EndOfDay/EndOfDayOperationRequestHandler"
+        },
+        {
+          "operationId": "5002",
+          "operationRequestFactoryPath": "Operations/CheckGiftCardBalance/CheckGiftCardBalanceFactory",
+          "operationRequestHandlerPath": "Operations/CheckGiftCardBalance/CheckGiftCardBalanceHandler"
+        },
+        {
+          "operationId": "5003",
+          "operationRequestFactoryPath": "Operations/SaveDataToSelectedCartLine/SaveDataToSelectedCartLineFactory",
+          "operationRequestHandlerPath": "Operations/SaveDataToSelectedCartLine/SaveDataToSelectedCartLineHandler"
+        },
+        {
+          "operationId": "5057",
+          "operationRequestFactoryPath": "Operations/CheckCustomersInB2C/CheckCustomersInB2COperationRequestFactory",
+          "operationRequestHandlerPath": "Operations/CheckCustomersInB2C/CheckCustomersInB2COperationRequestHandler"
+        }
+      ]
+    }
+  }
+}

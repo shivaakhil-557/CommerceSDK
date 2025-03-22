@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Search customer in Azure B2C tenant</title>
+    <style>
+        .excelBtn{
+            height: 45px !important;
+            width: 125px !important;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding: 2px 1px;
+            border : 2px solid green;
+            border-radius : 3px !important;
+        }
+        .excelBtn:hover{
+            border : 5px solid darkgreen;
+        }
+    </style>
+</head>
+<body>
+    <div class="col grow">
+        <div>
+            <div class="h2" data-bind="visible:!isFileDownloaded()">
+                <label class="h2" data-bind="text: waitingLabelTxt"></label>
+            </div>
+            <div class="h4" data-bind="visible:isFileDownloaded">
+                <label>Click the button to download</label>
+            </div>
+            <br /><br />
+            <div class="excelBtn h5" data-bind="visible:isFileDownloaded">
+                <a id="excelFile" href="#">Download&nbsp;&dArr;</a>
+            </div>
+            <br />
+        </div>
+    </div>
+</body>
+</html>

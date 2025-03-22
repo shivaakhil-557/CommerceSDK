@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\..\CustomizationPackage.props" />
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net472</TargetFramework>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <NoWarn>$(NoWarn);SA0001;CS0579</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <NoWarn>$(NoWarn);SA0001;CS0579</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="C:\Users\Admin77c5498dab\.nuget\packages\microsoft.dynamics.commerce.sdk.installers.storecommerce\$(CommerceSdkPackagesVersion)\contentFiles\cs\netstandard2.0\Program.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.Installers.StoreCommerce" Version="$(CommerceSdkPackagesVersion)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\ChannelDatabase\ChannelDatabase.csproj" ReferenceOutputAssembly="false" />
+		<ProjectReference Include="..\..\CommerceRuntime\CommerceRuntime.Extensions.csproj" ReferenceOutputAssembly="false" SkipGetTargetFrameworkProperties="true" />
+		<ProjectReference Include="..\..\POS\POS.csproj" ReferenceOutputAssembly="false" SkipGetTargetFrameworkProperties="true" />
+	</ItemGroup>
+</Project>

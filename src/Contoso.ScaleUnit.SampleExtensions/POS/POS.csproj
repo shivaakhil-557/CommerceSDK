@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\CustomizationPackage.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Contoso.SampleExtensions\**" />
+    <Compile Remove="ITS.POS.Extensions\**" />
+    <Compile Remove="Libraries\**" />
+    <Content Remove="Contoso.SampleExtensions\**" />
+    <Content Remove="ITS.POS.Extensions\**" />
+    <Content Remove="Libraries\**" />
+    <EmbeddedResource Remove="Contoso.SampleExtensions\**" />
+    <EmbeddedResource Remove="ITS.POS.Extensions\**" />
+    <EmbeddedResource Remove="Libraries\**" />
+    <TypeScriptCompile Remove="Contoso.SampleExtensions\**" />
+    <TypeScriptCompile Remove="ITS.POS.Extensions\**" />
+    <TypeScriptCompile Remove="Libraries\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="devDependencies\pos-tsconfig-base.json" />
+    <Content Include="devDependencies\schemas\cultureInfoSchema.json" />
+    <Content Include="devDependencies\schemas\manifestSchema.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="knockoutjs" Version="3.5.1" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.Pos" Version="$(CommerceSdkPackagesVersion)" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.0.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CommerceRuntime\CommerceRuntime.Extensions.csproj" ReferenceOutputAssembly="false" SkipGetTargetFrameworkProperties="true" />
+  </ItemGroup>
+	<Target Name="ContentIncludeKnockoutLibrary" BeforeTargets="AssignTargetPaths" DependsOnTargets="RunResolvePackageDependencies">
+		<PropertyGroup>
+			<KnockoutjsFile>Libraries/knockout.js</KnockoutjsFile>
+			<KnockoutLibraryFilePath Condition="'%(PackageDefinitions.Name)' == 'knockoutjs'">%(PackageDefinitions.ResolvedPath)\Content\Scripts\knockout-%(PackageDefinitions.Version).js</KnockoutLibraryFilePath>
+		</PropertyGroup>
+		<Copy SourceFiles="$(KnockoutLibraryFilePath)" DestinationFiles="$(KnockoutjsFile)" SkipUnchangedFiles="true" />
+		<!-- Necessary for CPOS -->
+		<ItemGroup>
+			<Content Include="$(KnockoutjsFile)"></Content>
+		</ItemGroup>
+	</Target>
+</Project>

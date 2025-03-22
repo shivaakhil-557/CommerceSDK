@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Payment</title>
+    <style>
+        .dualDisplay{
+            font-size: 15px;
+            padding: 2px;
+            margin: 2px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .hoverLbl {
+            cursor: pointer !important;
+        }
+
+        .hoverLbl:hover {
+            color: green !important;
+            transition: color ease-in 0.57s;
+        }
+
+        .container {
+            width: 95vw;
+            margin: auto;
+            height: 96vh;
+        }
+
+        .scroll {
+            overflow-y: scroll;
+            box-shadow: 0px 0px 3px grey;
+            margin: 5px;
+            height: 40%;
+        }
+
+        .shadow {
+            box-shadow: 0px 0px 3px grey;
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .hidden-text {
+            display: none;
+        }
+
+        .container-start {
+            justify-content: flex-start;
+            width: 40%;
+        }
+
+        .container-end {
+            justify-content: flex-end;
+            width: 30%;
+        }
+
+        .container-mid {
+            justify-content: center;
+            width: 30%;
+        }
+
+        .legend {
+            /*width: 70px;
+            padding: 2px;*/
+            font-size: 25px;
+            font-weight: bold;
+            color : darkblue;
+            margin-left: calc(50% - 35px - 7px);
+        }
+
+        .table{
+            width: auto;
+            margin: 20px auto;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9; /* Optional for better visibility */
+        }
+
+        .left{
+            text-align:left !important;
+        }
+
+        .centered{
+            padding:57px !important;
+        }
+        .right{
+            text-align:right!important;
+        }
+        .th, .td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .panel-div {
+            width: 45% !important;
+            padding: 7px !important;
+        }
+    </style>
+</head>
+<body>
+    <script id="Microsot_Pos_Extensibility_HND_DualDisplay" type="text/html">
+        <div class="dualDisplay height100Percent width100Percent">
+            <div style="padding-left: 12px !important; padding-right: 12px !important">
+                <div class="centered">
+                    <fieldset style="padding-left: 20px; padding-top: 10px; padding-right: 20px; padding-bottom: 10px; line-height: 21px;">
+                        <legend class="legend" data-bind="text:welcomeCustomerText">Welcome &#x1F64F;</legend>
+                        <div class="height700 width100Percent no-shrink col marginBottom20">
+                            <div class="col grow marginBottom48">
+                                <div class="row">
+                                    <h3 class="hoverLbl" data-bind="event:{click : showCartLines}">Lines</h3>
+                                    <div style="padding: 7px !important"></div>
+                                    <h3 class="hoverLbl" data-bind="event:{click : showPaymentLines}">Payments</h3>
+                                </div>
+                                <br /><br />
+                                <div id="dualDisplayCartLinesDataList" data-bind="visible: isActiveCartLines"></div>
+                                <div id="dualDisplayPaymentLinesDataList" data-bind="visible: isActivePaymentLines"></div>
+                                <div class="row marginTop12">
+                                    <div class="col stretch header shadow" style="justify-content: space-between;margin:5px;padding:20px;">
+                                        <div class="header panel layoutControl transactionDetails primaryPanelBackgroundColor highContrastBorderThin" style="justify-content: flex-start;">
+                                            <div class="panel-div">
+                                                <table style="width:100% !important">
+                                                    <thead>
+                                                        <tr></tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="td left">Discounts</td>
+                                                            <td class="td right" data-bind="text: totalDiscountAmount"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="gutter40x40"></div>
+                                            <div class="panel-div">
+                                                <table style="width:100% !important">
+                                                    <thead>
+                                                        <tr></tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="td left">Subtotal</td>
+                                                            <td class="td right" data-bind="text: cartNetAmountWithoutTax"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="td left">Tax</td>
+                                                            <td class="td right" data-bind="text: taxValue"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="td left">Payments</td>
+                                                            <td class="td right" data-bind="text: totalPaymentAmount"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row marginTop12">
+                                    <div class="col stretch panel-footer row padLeft12 padRight12 padTop04 padBottom04" style="justify-content: space-between;">
+                                        <div class="secondaryFontColor padBottom08">
+                                            <div class="h5" style="padding-left: 7px !important;">Amount Due</div>
+                                        </div>
+                                        <div class="right">
+                                            <h1 style="font-size: 57px !important;color:green;" data-bind="text: amountDue"></h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </script>
+</body>
+</html>
+
